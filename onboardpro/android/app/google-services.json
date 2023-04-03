@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "624858805333",
+    "project_id": "proud-will-380104",
+    "storage_bucket": "proud-will-380104.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:624858805333:android:c05fc56fa9c17f17f9d0dc",
+        "android_client_info": {
+          "package_name": "com.example.onboardpro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "624858805333-5pe767026vkohk4alsgqq5v22ii2kauh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCONLGBWiGnRsyaXHVHX-tXVG9NMGpSE0I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "624858805333-5pe767026vkohk4alsgqq5v22ii2kauh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
