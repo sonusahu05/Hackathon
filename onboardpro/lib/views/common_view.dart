@@ -89,7 +89,7 @@ class _CommonViewState extends State<CommonView> {
                 overflow: TextOverflow.ellipsis,
               ),
               Text(
-                'Welcome to SPIT Portal',
+                'Welcome to EKYC Portal',
                 style: GoogleFonts.dmSans(
                   textStyle: const TextStyle(
                     fontSize: 18,
@@ -136,7 +136,7 @@ class _CommonViewState extends State<CommonView> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Railway Concession form',
+                        const Text('Add Details for eKYC',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
@@ -148,7 +148,7 @@ class _CommonViewState extends State<CommonView> {
                         InkWell(
                           onTap: () {
                             Navigator.of(context).pushNamedAndRemoveUntil(
-                              concession,
+                              onboarding,
                               (route) => true,
                             );
                           },
@@ -185,7 +185,7 @@ class _CommonViewState extends State<CommonView> {
           ),
           const Padding(
             padding: EdgeInsets.only(left: 27.0, bottom: 8, top: 3),
-            child: Text('Explore Activities',
+            child: Text('Complete this steps to Onboard',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 21,
@@ -256,7 +256,7 @@ class _CommonViewState extends State<CommonView> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: const [
-                                Text('Events',
+                                Text('Step 1',
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 18,
@@ -271,7 +271,7 @@ class _CommonViewState extends State<CommonView> {
                                 ),
                               ],
                             ),
-                            const Text('Events List!',
+                            const Text('Phone Verification',
                                 style: TextStyle(
                                   color: Color(0xff656565),
                                   fontSize: 11,
@@ -339,7 +339,7 @@ class _CommonViewState extends State<CommonView> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: const [
-                                Text('Notes',
+                                Text('Step 2',
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 18,
@@ -354,7 +354,7 @@ class _CommonViewState extends State<CommonView> {
                                 ),
                               ],
                             ),
-                            const Text('Write Notes!',
+                            const Text('Document Upload and verification',
                                 style: TextStyle(
                                   color: Color(0xff656565),
                                   fontSize: 11,
@@ -422,7 +422,7 @@ class _CommonViewState extends State<CommonView> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: const [
-                                Text('onboardpro',
+                                Text('Step 3',
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 18,
@@ -437,7 +437,7 @@ class _CommonViewState extends State<CommonView> {
                                 ),
                               ],
                             ),
-                            const Text('Coming soon!',
+                            const Text('Face Verification',
                                 style: TextStyle(
                                   color: Color(0xff656565),
                                   fontSize: 11,
@@ -502,7 +502,7 @@ class _CommonViewState extends State<CommonView> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: const [
-                                Text('Notifications',
+                                Text('Congrats',
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 18,
@@ -517,7 +517,7 @@ class _CommonViewState extends State<CommonView> {
                                 ),
                               ],
                             ),
-                            const Text('Coming soon!',
+                            const Text('You are now a verified user',
                                 style: TextStyle(
                                   color: Color(0xff656565),
                                   fontSize: 11,

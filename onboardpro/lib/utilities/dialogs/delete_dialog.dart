@@ -29,6 +29,20 @@ Future<bool> showDeleteDialogConcession(BuildContext context) {
   );
 }
 
+Future<bool> showDeleteDialogOnboard(BuildContext context) {
+  return showGenericDialog<bool>(
+    context: context,
+    title: "Delete KYC?",
+    content: "If you delete you'll have to register again!",
+    optionsBuilder: () => {
+      "Cancel": false,
+      "Yes": true,
+    },
+  ).then(
+    (value) => value ?? false,
+  );
+}
+
 Future<bool> showRegistrationDialog(BuildContext context) {
   return showGenericDialog<bool>(
     context: context,

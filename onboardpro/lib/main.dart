@@ -12,6 +12,8 @@ import 'package:onboardpro/views/concession/concession_view.dart';
 import 'package:onboardpro/views/events/events_committee.dart';
 import 'package:onboardpro/views/events/events_details.dart';
 import 'package:onboardpro/views/events/events_view.dart';
+import 'package:onboardpro/views/onboard/onboard_register.dart';
+import 'package:onboardpro/views/onboard/onboarding_form_view.dart';
 import 'package:onboardpro/views/profile/about.dart';
 import 'package:onboardpro/views/profile/profile.dart';
 import 'package:flutter/material.dart';
@@ -71,6 +73,8 @@ Future main() async {
         createOrUpdateNoteRoute: (context) => const CreateUpdateNoteView(),
         profile: (context) => const ProfileView(),
         about: (context) => const AboutView(),
+        onboardingRegister: (context) => const OnboardRegister(),
+        onboarding: (context) => const OnboardingView(),
       },
     ),
   );
