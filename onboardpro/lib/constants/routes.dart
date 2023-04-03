@@ -17,3 +17,5 @@ const adminstart = "/adminstart/";
 const concessiondata = "/concessiondata/";
 const profile = "/profile/";
 const about = "/about/";
+const onboardingRegister = "/onboardingRegister/";
+const onboarding = "/onboarding/";

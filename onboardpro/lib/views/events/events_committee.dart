@@ -174,11 +174,11 @@ class _EventsAddState extends State<EventsAdd> {
             },
             itemBuilder: (context) {
               return [
-                PopupMenuItem<MenuAction>(
+                const PopupMenuItem<MenuAction>(
                   value: MenuAction.logout,
                   child: Text(
                     'Logout',
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.black,
                       fontSize: 16,
                     ),
