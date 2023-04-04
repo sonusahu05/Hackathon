@@ -370,7 +370,12 @@ class _CommonViewState extends State<CommonView> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    step3,
+                    (route) => true,
+                  );
+                },
                 child: Container(
                     width: 160,
                     margin: const EdgeInsets.symmetric(

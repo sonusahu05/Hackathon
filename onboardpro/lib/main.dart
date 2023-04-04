@@ -15,6 +15,7 @@ import 'package:onboardpro/views/events/events_view.dart';
 import 'package:onboardpro/views/onboard/onboard_register.dart';
 import 'package:onboardpro/views/onboard/onboarding_form_view.dart';
 import 'package:onboardpro/views/onboard/step2.dart';
+import 'package:onboardpro/views/onboard/step3.dart';
 import 'package:onboardpro/views/profile/about.dart';
 import 'package:onboardpro/views/profile/profile.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +77,8 @@ Future main() async {
         about: (context) => const AboutView(),
         onboardingRegister: (context) => const OnboardRegister(),
         onboarding: (context) => const OnboardingView(),
-        step2: (context) => const Step2(),
+        // step2: (context) => const Step2(),
+        // step3: (context) => const Step3(),
       },
     ),
   );
