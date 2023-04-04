@@ -43,7 +43,6 @@ class _Step2State extends State<Step2> {
   String _surname2 = "";
   String _address2 = "";
   String _gender2 = "";
-  String _emailData2 = "";
   String _dob2 = "";
   late DateTime dateTime;
   late DateTime lastDate;
@@ -79,7 +78,6 @@ class _Step2State extends State<Step2> {
       _address2 = encrypter2.decrypt64(widgetConcession.address, iv: iv2);
       _dob2 = encrypter2.decrypt64(widgetConcession.dob, iv: iv2);
       _gender2 = encrypter2.decrypt64(widgetConcession.gender, iv: iv2);
-      _emailData2 = encrypter2.decrypt64(widgetConcession.email, iv: iv2);
     }
   }
 
@@ -178,7 +176,7 @@ class _Step2State extends State<Step2> {
                             height: 20,
                           ),
                           Text(
-                            "$_nameData2 $_surname2 $_docVerify $_imgUrl",
+                            "Name: $_nameData2 $_surname2",
                             style: const TextStyle(
                               color: Color(0xff1e1e1e),
                               fontSize: 22,
@@ -190,7 +188,7 @@ class _Step2State extends State<Step2> {
                             height: 2,
                           ),
                           Text(
-                            _address2,
+                            "Address : $_address2",
                             style: const TextStyle(
                               color: Color(0xff1e1e1e),
                               fontSize: 22,
@@ -202,7 +200,7 @@ class _Step2State extends State<Step2> {
                             height: 2,
                           ),
                           Text(
-                            _dob2,
+                            "Date of Birth : $_dob2",
                             style: const TextStyle(
                               color: Color(0xff343434),
                               fontSize: 17,
@@ -214,7 +212,7 @@ class _Step2State extends State<Step2> {
                             height: 2,
                           ),
                           Text(
-                            _gender2,
+                            "Gender : $_gender2",
                             style: const TextStyle(
                               color: Color(0xff343434),
                               fontSize: 17,
@@ -226,7 +224,7 @@ class _Step2State extends State<Step2> {
                             height: 2,
                           ),
                           Text(
-                            _mobilenumber2,
+                            "Mobile Number : $_mobilenumber2",
                             style: const TextStyle(
                               color: Color(0xff343434),
                               fontSize: 17,
@@ -241,7 +239,7 @@ class _Step2State extends State<Step2> {
                             height: 2,
                           ),
                           Text(
-                            _emailData2,
+                            "Email : $_emailData",
                             style: const TextStyle(
                               color: Color(0xff343434),
                               fontSize: 17,

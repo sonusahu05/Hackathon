@@ -52,7 +52,6 @@ class _OnboardingStepsState extends State<OnboardingSteps> {
   Future<void> getExistingOnboard(BuildContext context) async {
     final widgetConcession = context.getArgument<CloudOnboard>();
     _concession = widgetConcession;
-    print("widgetConcession: $widgetConcession");
     if (widgetConcession != null) {
       _emailData = widgetConcession.email;
       _mobilenumber = widgetConcession.mobileNumber;
@@ -122,7 +121,7 @@ class _OnboardingStepsState extends State<OnboardingSteps> {
                 return ListView(
                   children: [
                     const Padding(
-                      padding: EdgeInsets.only(left: 27.0, bottom: 8, top: 3),
+                      padding: EdgeInsets.only(left: 27.0, bottom: 8, top: 20),
                       child: Text('Complete this steps to Onboard',
                           style: TextStyle(
                             color: Colors.black,
@@ -135,10 +134,12 @@ class _OnboardingStepsState extends State<OnboardingSteps> {
                       children: [
                         InkWell(
                           onTap: () {
-                            Navigator.of(context).pushNamed(
-                              eventView,
-                              arguments: _concession,
-                            );
+                            if (_docVerify == "false") {
+                              Navigator.of(context).pushNamed(
+                                eventView,
+                                arguments: _concession,
+                              );
+                            }
                           },
                           child: Container(
                               width: 160,
@@ -235,10 +236,12 @@ class _OnboardingStepsState extends State<OnboardingSteps> {
                         ),
                         InkWell(
                           onTap: () {
-                            Navigator.of(context).pushNamed(
-                              step2,
-                              arguments: _concession,
-                            );
+                            if (_docVerify == "false") {
+                              Navigator.of(context).pushNamed(
+                                step2,
+                                arguments: _concession,
+                              );
+                            }
                           },
                           child: Container(
                               width: 160,
@@ -320,8 +323,7 @@ class _OnboardingStepsState extends State<OnboardingSteps> {
                                           ),
                                         ],
                                       ),
-                                      const Text(
-                                          'Document Upload and verification',
+                                      const Text('Document verification',
                                           style: TextStyle(
                                             color: Color(0xff656565),
                                             fontSize: 11,
@@ -339,10 +341,12 @@ class _OnboardingStepsState extends State<OnboardingSteps> {
                       children: [
                         InkWell(
                           onTap: () {
-                            Navigator.of(context).pushNamed(
-                              step3,
-                              arguments: _concession,
-                            );
+                            if (_faceVerify == "false") {
+                              Navigator.of(context).pushNamed(
+                                step3,
+                                arguments: _concession,
+                              );
+                            }
                           },
                           child: Container(
                               width: 160,
