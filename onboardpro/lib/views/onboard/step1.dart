@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:onboardpro/constants/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class MyPhone extends StatefulWidget {
   const MyPhone({Key? key}) : super(key: key);
+  static String verify = "";
 
   @override
   State<MyPhone> createState() => _MyPhoneState();
@@ -9,6 +12,7 @@ class MyPhone extends StatefulWidget {
 
 class _MyPhoneState extends State<MyPhone> {
   TextEditingController countryController = TextEditingController();
+  var phone = "";
 
   @override
   void initState() {
@@ -20,40 +24,35 @@ class _MyPhoneState extends State<MyPhone> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
         margin: const EdgeInsets.only(left: 25, right: 25),
         alignment: Alignment.center,
         child: SingleChildScrollView(
-          
-          
           child: Column(
-            
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
                 'assets/images/icon/img1.png',
                 width: 150,
                 height: 150,
-                
               ),
               const SizedBox(
                 height: 25,
               ),
               const Text(
                 "Phone Verification",
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold,         backgroundColor: Colors.white
-),
+                style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    backgroundColor: Colors.white),
               ),
               const SizedBox(
                 height: 10,
               ),
               const Text(
-                "We need to register your phone without getting started!", 
-                style: TextStyle(
-                  fontSize: 16,
-        backgroundColor: Colors.white
-
-                ),
+                "We need to register your phone without getting started!",
+                style: TextStyle(fontSize: 16, backgroundColor: Colors.white),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(
@@ -82,16 +81,19 @@ class _MyPhoneState extends State<MyPhone> {
                     ),
                     const Text(
                       "|",
-                      style: TextStyle(fontSize: 33, color: Colors.grey,
-        backgroundColor: Colors.white
-                       ), 
-                      
+                      style: TextStyle(
+                          fontSize: 33,
+                          color: Colors.grey,
+                          backgroundColor: Colors.white),
                     ),
                     const SizedBox(
                       width: 10,
                     ),
-                    const Expanded(
+                    Expanded(
                         child: TextField(
+                      onChanged: (value) {
+                        phone = value;
+                      },
                       keyboardType: TextInputType.phone,
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -112,8 +114,23 @@ class _MyPhoneState extends State<MyPhone> {
                         backgroundColor: Colors.green.shade600,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
-                    onPressed: () {
-                      Navigator.pushNamed(context, 'verify');
+                    onPressed: () async {
+                      await FirebaseAuth.instance.verifyPhoneNumber(
+                        phoneNumber: '${countryController.text + phone}',
+                        verificationCompleted:
+                            (PhoneAuthCredential credential) {},
+                        verificationFailed: (FirebaseAuthException e) {},
+                        codeSent: (String verificationId, int? resendToken) {
+                          MyPhone.verify = verificationId;
+                          Navigator.pushNamed(context, verify);
+                        },
+                        codeAutoRetrievalTimeout: (String verificationId) {},
+                      );
+                      // Navigator.pushNamed(context, verifyy);
+                      // Navigator.of(context).pushNamedAndRemoveUntil(
+                      //         verifyy,
+                      //         (route) => true,
+                      //       );
                     },
                     child: const Text("Send the code")),
               )

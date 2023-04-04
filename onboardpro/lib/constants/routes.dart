@@ -19,3 +19,5 @@ const profile = "/profile/";
 const about = "/about/";
 const onboardingRegister = "/onboardingRegister/";
 const onboarding = "/onboarding/";
+const verify = "/verify/";
+const back = "/back.dart/";

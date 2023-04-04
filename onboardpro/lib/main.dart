@@ -12,7 +12,9 @@ import 'package:onboardpro/views/concession/concession_view.dart';
 import 'package:onboardpro/views/events/events_committee.dart';
 import 'package:onboardpro/views/events/events_details.dart';
 import 'package:onboardpro/views/events/events_view.dart';
+import 'package:onboardpro/views/onboard/verify.dart';
 import 'package:onboardpro/views/onboard/step1.dart';
+import 'package:onboardpro/views/onboard/back.dart';
 import 'package:onboardpro/views/onboard/onboard_register.dart';
 import 'package:onboardpro/views/onboard/onboarding_form_view.dart';
 import 'package:onboardpro/views/profile/about.dart';
@@ -62,6 +64,8 @@ Future main() async {
         adminstart: (context) => const AdminStart(),
         // eventView: (context) => const EventsView(),
         eventView: (context) => const MyPhone(),
+        verify: (context) => const MyVerify(),
+        back:(context) => const MyBack(),
         eventsDetails: (context) => const EventDetails(),
         eventsAdd: (context) => const EventsAdd(),
         student: (context) => const DataStudent(),
@@ -182,7 +186,6 @@ class _OnBoardingState extends State<OnBoarding> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        
         child: Column(
           children: <Widget>[
             const SizedBox(
