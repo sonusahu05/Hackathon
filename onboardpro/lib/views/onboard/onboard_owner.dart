@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:onboardpro/services/cloud/onboard/cloud_onboard.dart';
 import 'package:onboardpro/utilities/dialogs/delete_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:encrypt/encrypt.dart' as encrypt;
 
 typedef OnboardCallBack = void Function(CloudOnboard concession);
 
@@ -27,6 +30,17 @@ class OnboardOwner extends StatelessWidget {
           itemCount: concessions.length,
           itemBuilder: (context, index) {
             final concession = concessions.elementAt(index);
+            final keyBytes2 = base64.decode(concession.key);
+            final ivBytes2 = base64.decode(concession.iv);
+
+            final key2 = encrypt.Key(keyBytes2);
+            final iv2 = encrypt.IV(ivBytes2);
+            final encrypter2 = encrypt.Encrypter(encrypt.AES(key2));
+
+            final decryptedName =
+                encrypter2.decrypt64(concession.name, iv: iv2);
+            final decryptedSurname =
+                encrypter2.decrypt64(concession.surname, iv: iv2);
             return Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
@@ -49,7 +63,7 @@ class OnboardOwner extends StatelessWidget {
                     onTap(concession);
                   },
                   title: Text(
-                    '${concession.name} ${concession.surname}',
+                    '$decryptedName $decryptedSurname',
                     style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,

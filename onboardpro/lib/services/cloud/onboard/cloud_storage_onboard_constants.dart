@@ -11,3 +11,5 @@ const dobField = 'dob';
 const addressField = 'address';
 const imageUrlField = 'imageUrl';
 const userIdField = 'userId';
+const ivField = 'iv';
+const keyField = 'key';

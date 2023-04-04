@@ -1,9 +1,13 @@
+import 'dart:convert';
+
+import 'package:encrypt/encrypt.dart';
 import 'package:onboardpro/services/auth/auth_service.dart';
 import 'package:onboardpro/services/cloud/onboard/cloud_onboard.dart';
 import 'package:onboardpro/services/cloud/onboard/firebase_cloud_onboard_storage.dart';
 import 'package:onboardpro/utilities/dialogs/delete_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:encrypt/encrypt.dart' as encrypt;
 
 class OnboardRegister extends StatefulWidget {
   const OnboardRegister({super.key});
@@ -46,6 +50,23 @@ class _OnboardRegisterState extends State<OnboardRegister> {
   }
 
   Future<CloudOnboard> createNewOnboard() async {
+    final key = encrypt.Key.fromLength(32);
+    final iv = encrypt.IV.fromLength(16);
+    final encrypter = encrypt.Encrypter(AES(key));
+    final encryptedName = encrypter.encrypt(_name.text, iv: iv);
+    final encryptedSurname = encrypter.encrypt(_lastName.text, iv: iv);
+    final encryptedAddress = encrypter.encrypt(_address.text, iv: iv);
+    final encryptedMobileNumber = encrypter.encrypt(_mobileNumber.text, iv: iv);
+    final encryptedGender = encrypter.encrypt(_gender, iv: iv);
+    final encryptedDob =
+        encrypter.encrypt("${_dob!.day}/${_dob!.month}/${_dob!.year}", iv: iv);
+
+    final keyBytes = key.bytes;
+    final ivBytes = iv.bytes;
+
+    final keyString = base64.encode(keyBytes);
+    final ivString = base64.encode(ivBytes);
+    
     final existingConcession = _concession;
     if (existingConcession != null) {
       return existingConcession;
@@ -53,14 +74,15 @@ class _OnboardRegisterState extends State<OnboardRegister> {
     final userId = currentUser.id;
     final newConcession = await _concessionService.createNewOnboard(
       userId: userId,
-      name: _name.text,
-      surname: _lastName.text,
-      gender: _gender,
+      name: encryptedName.base64,
+      surname: encryptedSurname.base64,
+      address: encryptedAddress.base64,
+      mobileNumber: encryptedMobileNumber.base64,
+      dob: encryptedDob.base64,
       email: _email,
-      address: _address.text,
-      dob: "${_dob!.day}/${_dob!.month}/${_dob!.year}",
-      mobileNumber: _mobileNumber.text,
-      imageUrl: "",
+      gender: encryptedGender.base64,
+      key: keyString,
+      iv: ivString,
     );
     _concession = newConcession;
     return newConcession;
