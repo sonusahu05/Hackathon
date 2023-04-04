@@ -22,24 +22,25 @@ class FirebaseCloudStorageOnboard {
     required String dob,
     required String mobileNumber,
     required String imageUrl,
-    required String userId,
     required String surname,
     required String gender,
+    required String mobileVerified,
+    required String docVerified,
+    required String faceVerified,
   }) async {
     try {
       await onboard.doc(documentOnboardId).update({
-      nameField: name,
-      genderField: gender,
-      emailField: email,
-      addressField: address,
-      dobField: dob,
-      mobileNumberField: mobileNumber,
-      imageUrlField: imageUrl,
-      userIdField: userId,
-      surnameField: surname,
-      mobileVerifiedField: "false",
-      docVerifiedField: "false",
-      faceVerifiedField: "false",
+        nameField: name,
+        genderField: gender,
+        emailField: email,
+        addressField: address,
+        dobField: dob,
+        mobileNumberField: mobileNumber,
+        imageUrlField: imageUrl,
+        surnameField: surname,
+        mobileVerifiedField: mobileVerified,
+        docVerifiedField: docVerified,
+        faceVerifiedField: faceVerified,
       });
     } catch (e) {
       throw CouldNotUpdateNoteException();
@@ -67,7 +68,8 @@ class FirebaseCloudStorageOnboard {
     required String address,
     required String dob,
     required String mobileNumber,
-    required String imageUrl,
+    required String key,
+    required String iv,
   }) async {
     // final document =
     final document = await onboard.add({
@@ -77,12 +79,14 @@ class FirebaseCloudStorageOnboard {
       addressField: address,
       dobField: dob,
       mobileNumberField: mobileNumber,
-      imageUrlField: imageUrl,
+      imageUrlField: "",
       userIdField: userId,
       surnameField: surname,
       mobileVerifiedField: "false",
       docVerifiedField: "false",
       faceVerifiedField: "false",
+      keyField: key,
+      ivField: iv,
     });
     final fetchedOnboard = await document.get();
     return CloudOnboard(
@@ -97,8 +101,10 @@ class FirebaseCloudStorageOnboard {
       mobileNumber: mobileNumber,
       docVerified: "false",
       faceVerified: "false",
-      imageUrl: imageUrl,
+      imageUrl: "",
       userId: userId,
+      key: key,
+      iv: iv,
     );
   }
 
