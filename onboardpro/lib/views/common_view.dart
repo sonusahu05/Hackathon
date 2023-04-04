@@ -1,6 +1,5 @@
 import 'package:onboardpro/constants/routes.dart';
 import 'package:onboardpro/enums/menu_action.dart';
-import 'package:onboardpro/extensions/buildcontext/loc.dart';
 import 'package:onboardpro/services/auth/bloc/auth_bloc.dart';
 import 'package:onboardpro/services/auth/bloc/auth_event.dart';
 import 'package:onboardpro/utilities/dialogs/logout_dialog.dart';
@@ -198,7 +197,7 @@ class _CommonViewState extends State<CommonView> {
               InkWell(
                 onTap: () {
                   Navigator.of(context).pushNamedAndRemoveUntil(
-                    eventView,
+                    step1,
                     (route) => true,
                   );
                 },
@@ -285,7 +284,7 @@ class _CommonViewState extends State<CommonView> {
               InkWell(
                 onTap: () {
                   Navigator.of(context).pushNamedAndRemoveUntil(
-                    note,
+                    step2,
                     (route) => true,
                   );
                 },

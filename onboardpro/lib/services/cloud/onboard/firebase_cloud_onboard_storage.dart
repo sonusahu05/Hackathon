@@ -22,9 +22,12 @@ class FirebaseCloudStorageOnboard {
     required String dob,
     required String mobileNumber,
     required String imageUrl,
-    required String userId,
     required String surname,
     required String gender,
+    required String mobileVerified,
+    required String docVerified,
+    required String faceVerified,
+    
   }) async {
     try {
       await onboard.doc(documentOnboardId).update({
@@ -35,11 +38,10 @@ class FirebaseCloudStorageOnboard {
       dobField: dob,
       mobileNumberField: mobileNumber,
       imageUrlField: imageUrl,
-      userIdField: userId,
       surnameField: surname,
-      mobileVerifiedField: "false",
-      docVerifiedField: "false",
-      faceVerifiedField: "false",
+      mobileVerifiedField: mobileVerified,
+      docVerifiedField: docVerified,
+      faceVerifiedField: faceVerified,
       });
     } catch (e) {
       throw CouldNotUpdateNoteException();

@@ -1,15 +1,9 @@
-import 'dart:io';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:onboardpro/services/auth/auth_service.dart';
 import 'package:onboardpro/services/cloud/onboard/cloud_onboard.dart';
 import 'package:onboardpro/services/cloud/onboard/firebase_cloud_onboard_storage.dart';
 import 'package:onboardpro/utilities/dialogs/delete_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../services/cloud/onboard/firebase_storage.dart';
 
 class OnboardRegister extends StatefulWidget {
   const OnboardRegister({super.key});
@@ -20,7 +14,6 @@ class OnboardRegister extends StatefulWidget {
 
 class _OnboardRegisterState extends State<OnboardRegister> {
   DateTime? _dob;
-  File? _imageFile;
   late final TextEditingController _address;
   late final TextEditingController _name;
   late final TextEditingController _lastName;
@@ -28,7 +21,6 @@ class _OnboardRegisterState extends State<OnboardRegister> {
   String _gender = "Male";
   late final DateTime now;
   late final TextEditingController _mobileNumber;
-  late String _imageUrl;
   final currentUser = AuthService.firebase().currentUser!;
 
   CloudOnboard? _concession;
@@ -50,7 +42,6 @@ class _OnboardRegisterState extends State<OnboardRegister> {
     _lastName.text = '';
     _address.text = '';
     _mobileNumber.text = '';
-    _imageUrl = '';
     super.initState();
   }
 
@@ -69,7 +60,7 @@ class _OnboardRegisterState extends State<OnboardRegister> {
       address: _address.text,
       dob: "${_dob!.day}/${_dob!.month}/${_dob!.year}",
       mobileNumber: _mobileNumber.text,
-      imageUrl: _imageUrl,
+      imageUrl: "",
     );
     _concession = newConcession;
     return newConcession;
@@ -145,7 +136,6 @@ class _OnboardRegisterState extends State<OnboardRegister> {
 
   @override
   Widget build(BuildContext context) {
-    final Storage storage = Storage();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -453,105 +443,6 @@ class _OnboardRegisterState extends State<OnboardRegister> {
                   "Add your residential address", null),
             ),
           ),
-
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 50,
-              right: 50,
-            ),
-            child: Container(
-              height: 200, // Set the height of the container.
-              width: 200, // Set the width of the container.
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                    15), // Add a border radius to the container.
-                color: Colors
-                    .grey[300], // Add a background color to the container.
-              ),
-              child: _imageFile != null
-                  ? ClipRRect(
-                      borderRadius: BorderRadius.circular(
-                          15), // Add a border radius to the image.
-                      child: Image(
-                        image: FileImage(_imageFile!),
-                        fit: BoxFit
-                            .cover, // Add a fit property to the image to make it cover the container.
-                      ),
-                    )
-                  : Center(
-                      child: Text(
-                        'No image selected', // Add a message to display if no image is selected.
-                        style: TextStyle(
-                          color: Colors.grey[600],
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-            ),
-          ),
-          // Show nothing if no image is selected.
-          const SizedBox(
-            height: 16,
-          ),
-
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 100,
-              right: 100,
-            ),
-            child: InkWell(
-              splashColor: const Color.fromARGB(255, 134, 146, 224),
-              onTap: (() async {
-                final results = await FilePicker.platform.pickFiles(
-                  type: FileType.custom,
-                  allowMultiple: false,
-                  allowCompression: true,
-                  allowedExtensions: ['png', 'jpg', 'jpeg'],
-                );
-
-                if (results == null) {
-                  if (!mounted) return;
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text("No File has been picked"),
-                  ));
-                  return;
-                } else {
-                  if (!mounted) return;
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text("Image Uploaded"),
-                  ));
-                }
-                final newName = Timestamp.now();
-                final path = results.files.single.path!;
-                final fileName = newName.toString();
-                _imageUrl = fileName;
-                storage.uploadFile(path, fileName);
-
-                setState(() {
-                  _imageFile = File(path);
-                  // Set the image file to the selected file.
-                });
-              }),
-              child: Container(
-                alignment: Alignment.center,
-                height: 50,
-                width: 150,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  color: const Color(0xff000028),
-                ),
-                child: const Text(
-                  'Upload',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
-            ),
-          ),
           const SizedBox(
             height: 20,
           ),
@@ -565,7 +456,6 @@ class _OnboardRegisterState extends State<OnboardRegister> {
                       _address.text != "" &&
                       _gender != "" &&
                       _dob != null &&
-                      _imageUrl != "" &&
                       _mobileNumber.text != "") {
                     createNewOnboard();
                     await showRegistrationDialog(context);

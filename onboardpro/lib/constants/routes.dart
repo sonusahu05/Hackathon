@@ -19,3 +19,7 @@ const profile = "/profile/";
 const about = "/about/";
 const onboardingRegister = "/onboardingRegister/";
 const onboarding = "/onboarding/";
+const step1 = "/step1/";
+const step2 = "/step2/";
+const step3 = "/step3/";
+const step4 = "/step4/";

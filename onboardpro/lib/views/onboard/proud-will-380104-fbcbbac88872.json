@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "proud-will-380104",
+  "private_key_id": "fbcbbac88872813d5cea88c563db0fce1ab0383d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC7WNQNIPh9AmAJ\nU/D6D1Mgm69Ir0C3FE91JVaCyAoz+Jnzg9mUTZvZO/R1HAj7ScH2mHAMgCpJUP9b\nCgBp4hO7yFzZb2j0qX+1b0xiRqOtBj3KgTwjGj7RllXMW/bieHsUl3ZpAwnRJalr\nqTkVs1O45ibn4TglaCt7kyEjWrFY6uhUI235XfjFpKQ6pHYtcDcL2UTTHPbR/scp\nu0fq/Ro3rJXDggBunkoNi+XCWFcv4sz7XWPiNb/kbO+v7cqU6fXQAGTqaMp008md\n5bqHTRjLg7y5/Dj5dZwI5Thm4Sh8lbIYLmVWxe6y+ZbLUVx5mgwlP3aECTG5hpFz\n14NjveuhAgMBAAECggEAA6T4WAqJhu4ERf4t6IFij7ZzmBV/q+gPXSMlLg1b5HOs\nNABfO8swMk9AI8SQOKowRZ6kxFt8Zxl2JDRbOnQRR/R/eOPZzfObpkEEYn+HCNM/\nobg2niSxLuTOpbduw6xOEaIaJbQPTXQe+fcMYxuOUAEbJeTb0Z93hBOCQCSwIT+F\nAJt4WtEYde+vOLlgY0zOS6oJQBYh5bKA3l39jr5qrEy2p9PjHwNZw/nik07wqq8f\n5XTAlNse/eIReQdzoE4k4soZNNX/5xVXIU1lUG3wUsO7hC7pYKcN+VpQdb/z9Qi1\n3Pdf6/Ruqc3Univ0b5P2nV5a7klhSYIY59ZFHwGEKQKBgQD3immbKqbNUh6uM5GD\nncI+mbBwU3AOOFg9jVfH0vhyMUci5HS9p60CZdWXxcDuY38H9787VFuA8mx3oJFm\nlEdkTVHKDuecqxUQaKuVxdINMiBemmWVOIUKjQxIB2y9ZcPv+JU/ym44vzRoewH3\nTRaunSQXM77lEd2LK4umIEYCeQKBgQDBv9ES+2eFNEqENxi/kmBqdVsfoADZEnQ/\nfXFlY9oaQ500ttULxt9z6sAbzAtA0D81BX7gKup3XtNXlePAZWJl8wj3sTgWp2JC\ntHTUi2ngQo3oJJKi8ARMBjGU0YdnJqY0WG2eqtGgET1NcBkOXqi59dozlc5wUfCt\nvbTRYsQoaQKBgQDkLtcCjeKMyfI2KpssdDQmeI3IPWHB+fZ9ZtlP/g2/VeV5KJbk\nbLhyyWSHL2eVWGo08g95pV1kFBQgggcGRBE7SHrog6zFIn+cTKA+w8fJGjf0fOa/\nEwawnyx/CTkXrcNcZg1ObFAGR1sMJLe/O3R5KamnKbACgOFz9IQacw2WIQKBgQCg\nEhro5N4dFhuualq/A2825ShY03d/4Bg80CXcj4eFBXGfOKKBbVf1y+/Vx1lQvfxK\nkPTGvY4i+yv+g667qMeH1SgGg9sEFFxBIhgX9eqORk45ieXASi4ypTdXbVjB5xOP\n0bMXUKeJ6FROYxvAXIJnyO/yiIUbFQeUc1QtXb0UaQKBgCIdPSsA+obsg5iB6IKw\n/sOn+4//R5tClBO0ceVFJO1U1wJcORDQJXpndzZV3BvfYr7CC/byKjPjtQbIrPHP\nxv1QYd7LiBcmFWj0sr6fqZD2+dwjv5YQHPBfPK5Fw2fsZG5CuLf5HulxQKf5cX2e\nBLrZ5KfbAKsXE5We3VQjgfrI\n-----END PRIVATE KEY-----\n",
+  "client_email": "ekyc-442@proud-will-380104.iam.gserviceaccount.com",
+  "client_id": "112318152888593602678",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ekyc-442%40proud-will-380104.iam.gserviceaccount.com"
+}

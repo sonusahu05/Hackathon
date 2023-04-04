@@ -1,5 +1,4 @@
 import 'package:onboardpro/constants/routes.dart';
-import 'package:onboardpro/extensions/buildcontext/loc.dart';
 import 'package:onboardpro/services/cloud/concession/cloud_concession.dart';
 import 'package:onboardpro/utilities/dialogs/delete_dialog.dart';
 import 'package:onboardpro/utilities/dialogs/generic_dialog.dart';
