@@ -22,7 +22,7 @@ class _OnboardingStepsState extends State<OnboardingSteps> {
   String _mobilenumber = "";
   String _gender = "";
   String _address = "";
-  String _docVerify = "false";
+  String _docVerify = "";
   String _imgUrl = "";
   String _dob = "";
   String _mobileVerify = "";
@@ -63,6 +63,8 @@ class _OnboardingStepsState extends State<OnboardingSteps> {
       _gender = widgetConcession.gender;
       _mobileVerify = widgetConcession.mobileVerified;
       _faceVerify = widgetConcession.faceVerified;
+      _docVerify = widgetConcession.docVerified;
+      _imgUrl = widgetConcession.imageUrl;
     }
   }
 
