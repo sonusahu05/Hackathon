@@ -25,3 +25,4 @@ const step3 = "/step3/";
 const step4 = "/step4/";
 const verify = "/verify/";
 const back = "/back.dart/";
+const steps = "/steps.dart/";

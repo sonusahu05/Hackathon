@@ -67,7 +67,7 @@ class _MyVerifyState extends State<MyVerify> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/img1.png',
+                'assets/images/icon/img1.png',
                 width: 150,
                 height: 150,
               ),
@@ -123,11 +123,8 @@ class _MyVerifyState extends State<MyVerify> {
 
                         // Sign the user in (or link) with the credential
                         await auth.signInWithCredential(credential);
-                        Navigator.pushNamed(context, back);
-                        // Navigator.pushNamedAndRemoveUntil(
-                        //     context, 'back', (route) => false);
-                      } 
-                      catch (e) {
+                        Navigator.of(context).pop(true);
+                      } catch (e) {
                         print("Invalid OTP !");
                       }
                     },

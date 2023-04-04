@@ -91,7 +91,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                                 },
                                 onTap: (concession) {
                                   Navigator.of(context).pushNamed(
-                                    step2,
+                                    steps,
                                     arguments: concession,
                                   );
                                 },

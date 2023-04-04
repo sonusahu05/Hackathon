@@ -197,7 +197,7 @@ class _CommonViewState extends State<CommonView> {
               InkWell(
                 onTap: () {
                   Navigator.of(context).pushNamedAndRemoveUntil(
-                    step1,
+                    eventView,
                     (route) => true,
                   );
                 },
@@ -410,10 +410,8 @@ class _CommonViewState extends State<CommonView> {
                           height: 15,
                         ),
                         Center(
-                          child: Image.asset(
-                              'assets/images/icon/onboardpro.png',
-                              height: 60,
-                              width: 60),
+                          child: Image.asset('assets/images/icon/onboard.png',
+                              height: 60, width: 60),
                         ),
                         const SizedBox(
                           height: 25,

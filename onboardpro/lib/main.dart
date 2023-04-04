@@ -12,9 +12,9 @@ import 'package:onboardpro/views/concession/concession_view.dart';
 import 'package:onboardpro/views/events/events_committee.dart';
 import 'package:onboardpro/views/events/events_details.dart';
 import 'package:onboardpro/views/events/events_view.dart';
+import 'package:onboardpro/views/onboard/onboard.dart';
 import 'package:onboardpro/views/onboard/verify.dart';
 import 'package:onboardpro/views/onboard/step1.dart';
-import 'package:onboardpro/views/onboard/back.dart';
 import 'package:onboardpro/views/onboard/onboard_register.dart';
 import 'package:onboardpro/views/onboard/onboarding_form_view.dart';
 import 'package:onboardpro/views/onboard/step2.dart';
@@ -67,7 +67,6 @@ Future main() async {
         // eventView: (context) => const EventsView(),
         eventView: (context) => const MyPhone(),
         verify: (context) => const MyVerify(),
-        back:(context) => const MyBack(),
         eventsDetails: (context) => const EventDetails(),
         eventsAdd: (context) => const EventsAdd(),
         student: (context) => const DataStudent(),
@@ -85,6 +84,7 @@ Future main() async {
         onboarding: (context) => const OnboardingView(),
         // step2: (context) => const Step2(),
         // step3: (context) => const Step3(),
+        steps:(context) => const OnboardingSteps(),
       },
     ),
   );
