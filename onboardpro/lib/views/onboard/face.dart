@@ -18,8 +18,8 @@ class _FaceIOState extends State<FaceIO> {
   var image2 = Regula.MatchFacesImage();
   var img1 = Image.asset('assets/images/portrait.png');
   var img2 = Image.asset('assets/images/portrait.png');
-  String _similarity = "nil";
-  String _liveness = "nil";
+  String _similarity = "Not processed";
+  String _liveness = "Not processed";
 
   @override
   void initState() {
@@ -84,13 +84,13 @@ class _FaceIOState extends State<FaceIO> {
 
   setImage(bool first, Uint8List? imageFile, int type) {
     if (imageFile == null) return;
-    setState(() => _similarity = "nil");
+    setState(() => _similarity = "Not processed");
     if (first) {
       image1.bitmap = base64Encode(imageFile);
       image1.imageType = type;
       setState(() {
         img1 = Image.memory(imageFile);
-        _liveness = "nil";
+        _liveness = "Not processed";
       });
     } else {
       image2.bitmap = base64Encode(imageFile);
@@ -103,8 +103,8 @@ class _FaceIOState extends State<FaceIO> {
     setState(() {
       img1 = Image.asset('assets/images/portrait.png');
       img2 = Image.asset('assets/images/portrait.png');
-      _similarity = "nil";
-      _liveness = "nil";
+      _similarity = "Not processed";
+      _liveness = "Not processed";
     });
     image1 = Regula.MatchFacesImage();
     image2 = Regula.MatchFacesImage();
@@ -126,8 +126,7 @@ class _FaceIOState extends State<FaceIO> {
         var split = Regula.MatchFacesSimilarityThresholdSplit.fromJson(
             json.decode(str));
         setState(() => _similarity = split!.matchedFaces.length > 0
-            ? ((split.matchedFaces[0]!.similarity! * 100).toStringAsFixed(2) +
-                "%")
+            ? ("${(split.matchedFaces[0]!.similarity! * 100).toStringAsFixed(2)}%")
             : "error");
       });
     });
@@ -158,15 +157,14 @@ class _FaceIOState extends State<FaceIO> {
   Widget createImage(image, VoidCallback onPress) => Material(
           child: InkWell(
         onTap: onPress,
-        child: Container(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20.0),
-            child: Image(height: 150, width: 150, image: image),
-          ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20.0),
+          child: Image(height: 150, width: 150, image: image),
         ),
       ));
   @override
   Widget build(BuildContext context) => Scaffold(
+        backgroundColor: Colors.white,
         body: Container(
             margin: const EdgeInsets.fromLTRB(0, 0, 0, 100),
             width: double.infinity,
@@ -185,10 +183,11 @@ class _FaceIOState extends State<FaceIO> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Similarity: " + _similarity,
+                          Text("Similarity: $_similarity",
                               style: const TextStyle(fontSize: 18)),
-                          Container(margin: const EdgeInsets.fromLTRB(20, 0, 0, 0)),
-                          Text("Liveness: " + _liveness,
+                          Container(
+                              margin: const EdgeInsets.fromLTRB(20, 0, 0, 0)),
+                          Text("Liveness: $_liveness",
                               style: const TextStyle(fontSize: 18))
                         ],
                       ))
