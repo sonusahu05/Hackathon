@@ -1,17 +1,8 @@
 import 'package:onboardpro/constants/constants.dart';
 import 'package:onboardpro/services/auth/auth_service.dart';
 import 'package:onboardpro/services/auth/firebase_auth_provider.dart';
-import 'package:onboardpro/views/admin/admin_data_view.dart';
-import 'package:onboardpro/views/admin/admin_start.dart';
-import 'package:onboardpro/views/admin/admin_view.dart';
 import 'package:onboardpro/views/common_view.dart';
-import 'package:onboardpro/views/concession/concession_register.dart';
-import 'package:onboardpro/views/concession/concession_request.dart';
-import 'package:onboardpro/views/concession/concession_status.dart';
-import 'package:onboardpro/views/concession/concession_view.dart';
-import 'package:onboardpro/views/events/events_committee.dart';
-import 'package:onboardpro/views/events/events_details.dart';
-import 'package:onboardpro/views/events/events_view.dart';
+import 'package:onboardpro/views/onboard/face.dart';
 import 'package:onboardpro/views/onboard/onboard.dart';
 import 'package:onboardpro/views/onboard/verify.dart';
 import 'package:onboardpro/views/onboard/step1.dart';
@@ -63,28 +54,20 @@ Future main() async {
               showHome: showHome,
             ),
       routes: {
-        adminstart: (context) => const AdminStart(),
         // eventView: (context) => const EventsView(),
         eventView: (context) => const MyPhone(),
         verify: (context) => const MyVerify(),
-        eventsDetails: (context) => const EventDetails(),
-        eventsAdd: (context) => const EventsAdd(),
-        student: (context) => const DataStudent(),
-        admin: (context) => const AdminView(),
         note: (context) => const NotesView(),
-        concessionRegister: (context) => const ConcessionRegister(),
-        concessionStatus: (context) => const ConcessionStatus(),
-        concessionRequest: (context) => const ConcessionRequest(),
         common: (context) => const CommonView(),
-        concession: (context) => const ConcessionView(),
         createOrUpdateNoteRoute: (context) => const CreateUpdateNoteView(),
         profile: (context) => const ProfileView(),
         about: (context) => const AboutView(),
         onboardingRegister: (context) => const OnboardRegister(),
         onboarding: (context) => const OnboardingView(),
         step2: (context) => const Step2(),
-        // step3: (context) => const Step3(),
+        step3: (context) => const Step3(),
         steps:(context) => const OnboardingSteps(),
+        face :(context) => const FaceIO(),
       },
     ),
   );
@@ -126,13 +109,13 @@ class _HomePageState extends State<HomePage> {
         },
         builder: (context, state) {
           if (state is AuthStateLoggedIn) {
-            if (userEmail == adminConcession || userEmail == adminConcession2) {
-              return const AdminStart();
-            } else if (userEmail == adminEvents) {
-              return const EventsAdd();
-            } else {
+            // if (userEmail == adminConcession || userEmail == adminConcession2) {
+            //   return const AdminStart();
+            // } else if (userEmail == adminEvents) {
+            //   return const EventsAdd();
+            // } else {
               return const BottomNavBar();
-            }
+            // }
           } else if (state is AuthStateNeedsVerification) {
             return const VerifyEmailView();
           } else if (state is AuthStateLoggedOut) {
