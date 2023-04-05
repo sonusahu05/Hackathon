@@ -624,7 +624,8 @@ class _Step2State extends State<Step2> {
 
                                     if (_docVerify == "true") {
                                       _saveConcessionIfTextNotEmpty();
-                                      Navigator.pop(context);
+                                      Navigator.of(context).pop(true);
+                                      ;
                                     }
                                   } else if (_idType == "Pancard") {
                                     FirebaseVisionImage visionImage =
@@ -718,7 +719,8 @@ class _Step2State extends State<Step2> {
 
                                     if (_docVerify == "true") {
                                       _saveConcessionIfTextNotEmpty();
-                                      Navigator.pop(context);
+                                      Navigator.of(context).pop(true);
+                                      ;
                                     }
                                   } else {
                                     FirebaseVisionImage visionImage =
@@ -802,7 +804,7 @@ class _Step2State extends State<Step2> {
 
                                     if (_docVerify == "true") {
                                       _saveConcessionIfTextNotEmpty();
-                                      Navigator.pop(context);
+                                      Navigator.of(context).pop(true);
                                     }
                                   }
                                 }),

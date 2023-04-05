@@ -39,7 +39,7 @@ class _MyPhoneState extends State<MyPhone> {
     if (result == true) {
       _mobileVerify = "true";
       _saveConcessionIfTextNotEmpty();
-      Navigator.pop(context);
+      Navigator.of(context).pop(true);
     }
   }
 

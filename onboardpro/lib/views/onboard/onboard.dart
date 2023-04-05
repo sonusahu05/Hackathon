@@ -50,6 +50,42 @@ class _OnboardingStepsState extends State<OnboardingSteps> {
     }
   }
 
+  Future<void> _navigateAndDisplaySelection1(
+      BuildContext context, CloudOnboard concession) async {
+    final result = await Navigator.of(context).pushNamed(
+      eventView,
+      arguments: concession,
+    );
+    if (!mounted) return;
+    if (result == true) {
+      Navigator.pop(context);
+    }
+  }
+
+  Future<void> _navigateAndDisplaySelection2(
+      BuildContext context, CloudOnboard concession) async {
+    final result = await Navigator.of(context).pushNamed(
+      step2,
+      arguments: concession,
+    );
+    if (!mounted) return;
+    if (result == true) {
+      Navigator.pop(context);
+    }
+  }
+
+  Future<void> _navigateAndDisplaySelection3(
+      BuildContext context, CloudOnboard concession) async {
+    final result = await Navigator.of(context).pushNamed(
+      step3,
+      arguments: concession,
+    );
+    if (!mounted) return;
+    if (result == true) {
+      Navigator.pop(context);
+    }
+  }
+
   Future<void> getExistingOnboard(BuildContext context) async {
     final widgetConcession = context.getArgument<CloudOnboard>();
     _concession = widgetConcession;
@@ -71,7 +107,14 @@ class _OnboardingStepsState extends State<OnboardingSteps> {
   @override
   void initState() {
     _onboardingService = FirebaseCloudStorageOnboard();
+
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    getExistingOnboard(context);
   }
 
   @override
@@ -136,10 +179,8 @@ class _OnboardingStepsState extends State<OnboardingSteps> {
                         InkWell(
                           onTap: () {
                             if (_docVerify == "false") {
-                              Navigator.of(context).pushNamed(
-                                eventView,
-                                arguments: _concession,
-                              );
+                              _navigateAndDisplaySelection1(
+                                  context, _concession!);
                             }
                           },
                           child: Container(
@@ -238,10 +279,8 @@ class _OnboardingStepsState extends State<OnboardingSteps> {
                         InkWell(
                           onTap: () {
                             if (_docVerify == "false") {
-                              Navigator.of(context).pushNamed(
-                                step2,
-                                arguments: _concession,
-                              );
+                              _navigateAndDisplaySelection2(
+                                  context, _concession!);
                             }
                           },
                           child: Container(
@@ -343,10 +382,8 @@ class _OnboardingStepsState extends State<OnboardingSteps> {
                         InkWell(
                           onTap: () {
                             if (_faceVerify == "false") {
-                              Navigator.of(context).pushNamed(
-                                step3,
-                                arguments: _concession,
-                              );
+                              _navigateAndDisplaySelection3(
+                                  context, _concession!);
                             }
                           },
                           child: Container(
@@ -439,7 +476,9 @@ class _OnboardingStepsState extends State<OnboardingSteps> {
                               )),
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            // _navigateAndDisplaySelection4(context, _concession!);
+                          },
                           child: Container(
                               width: 160,
                               margin: const EdgeInsets.symmetric(
