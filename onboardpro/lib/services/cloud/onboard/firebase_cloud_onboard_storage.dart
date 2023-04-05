@@ -27,6 +27,7 @@ class FirebaseCloudStorageOnboard {
     required String mobileVerified,
     required String docVerified,
     required String faceVerified,
+    required String idNum,
   }) async {
     try {
       await onboard.doc(documentOnboardId).update({
@@ -41,6 +42,7 @@ class FirebaseCloudStorageOnboard {
         mobileVerifiedField: mobileVerified,
         docVerifiedField: docVerified,
         faceVerifiedField: faceVerified,
+        idNumField: idNum,
       });
     } catch (e) {
       throw CouldNotUpdateNoteException();
@@ -70,6 +72,7 @@ class FirebaseCloudStorageOnboard {
     required String mobileNumber,
     required String key,
     required String iv,
+    required String idNum,
   }) async {
     // final document =
     final document = await onboard.add({
@@ -87,6 +90,7 @@ class FirebaseCloudStorageOnboard {
       faceVerifiedField: "false",
       keyField: key,
       ivField: iv,
+      idNumField: idNum,
     });
     final fetchedOnboard = await document.get();
     return CloudOnboard(
@@ -105,6 +109,7 @@ class FirebaseCloudStorageOnboard {
       userId: userId,
       key: key,
       iv: iv,
+      idNum: idNum,
     );
   }
 

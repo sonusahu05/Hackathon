@@ -1,5 +1,5 @@
 const documentOnboardIdField = 'documentOnboardId';
-const nameField  = 'name';
+const nameField = 'name';
 const surnameField = 'surname';
 const genderField = "gender";
 const emailField = 'email';
@@ -13,3 +13,4 @@ const imageUrlField = 'imageUrl';
 const userIdField = 'userId';
 const ivField = 'iv';
 const keyField = 'key';
+const idNumField = 'id';

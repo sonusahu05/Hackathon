@@ -19,6 +19,7 @@ class CloudOnboard {
   final String userId;
   final String key;
   final String iv;
+  final String idNum;
 
   const CloudOnboard({
     required this.documentOnboardId,
@@ -36,6 +37,7 @@ class CloudOnboard {
     required this.userId,
     required this.key,
     required this.iv,
+    required this.idNum,
   });
 
   CloudOnboard.fromSnapshot(
@@ -54,5 +56,6 @@ class CloudOnboard {
         address = snapshot.data()[addressField] as String,
         userId = snapshot.data()[userIdField] as String,
         iv = snapshot.data()[ivField] as String,
-        key = snapshot.data()[keyField] as String;
+        key = snapshot.data()[keyField] as String,
+        idNum = snapshot.data()[idNumField] as String;
 }

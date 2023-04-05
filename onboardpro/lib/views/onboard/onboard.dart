@@ -27,7 +27,7 @@ class _OnboardingStepsState extends State<OnboardingSteps> {
   String _dob = "";
   String _mobileVerify = "";
   String _faceVerify = "";
-
+  String _idNum = "";
   CloudOnboard? _concession;
   void _saveConcessionIfTextNotEmpty() async {
     final concession = _concession;
@@ -45,6 +45,7 @@ class _OnboardingStepsState extends State<OnboardingSteps> {
         gender: _gender,
         mobileVerified: _mobileVerify,
         faceVerified: _faceVerify,
+        idNum: _idNum,
       );
     }
   }

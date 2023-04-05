@@ -77,6 +77,7 @@ dependencies:
   firebase_ml_vision:  ^0.9.10
   aws_rekognition_api: ^2.0.0
   encrypt: ^5.0.1
+  govt_documents_validator: ^0.0.1
 
 dev_dependencies:
   flutter_test:

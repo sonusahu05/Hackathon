@@ -21,6 +21,7 @@ class _OnboardRegisterState extends State<OnboardRegister> {
   late final TextEditingController _address;
   late final TextEditingController _name;
   late final TextEditingController _lastName;
+  late final TextEditingController _idNum;
   late final String _email;
   String _gender = "Male";
   late final DateTime now;
@@ -39,7 +40,7 @@ class _OnboardRegisterState extends State<OnboardRegister> {
     _lastName = TextEditingController();
     _address = TextEditingController();
     _email = currentUser.email;
-
+    _idNum = TextEditingController();
     _mobileNumber = TextEditingController();
 
     _name.text = '';
@@ -60,13 +61,13 @@ class _OnboardRegisterState extends State<OnboardRegister> {
     final encryptedGender = encrypter.encrypt(_gender, iv: iv);
     final encryptedDob =
         encrypter.encrypt("${_dob!.day}/${_dob!.month}/${_dob!.year}", iv: iv);
-
+    final encryptedId = encrypter.encrypt(_idNum.text, iv: iv);
     final keyBytes = key.bytes;
     final ivBytes = iv.bytes;
 
     final keyString = base64.encode(keyBytes);
     final ivString = base64.encode(ivBytes);
-    
+
     final existingConcession = _concession;
     if (existingConcession != null) {
       return existingConcession;
@@ -83,6 +84,7 @@ class _OnboardRegisterState extends State<OnboardRegister> {
       gender: encryptedGender.base64,
       key: keyString,
       iv: ivString,
+      idNum: encryptedId.base64,
     );
     _concession = newConcession;
     return newConcession;
@@ -94,6 +96,7 @@ class _OnboardRegisterState extends State<OnboardRegister> {
     _lastName.dispose();
     _address.dispose();
     _mobileNumber.dispose();
+    _idNum.dispose();
     super.dispose();
   }
 
@@ -262,6 +265,21 @@ class _OnboardRegisterState extends State<OnboardRegister> {
               style: inputTextStyle,
               controller: _mobileNumber,
               decoration: getCommonInputDecoration("Mobile Nubmer", null),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(left: 30, right: 30, bottom: 23),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+            ),
+            alignment: Alignment.centerLeft,
+            height: 50,
+            width: MediaQuery.of(context).size.width * 0.37,
+            decoration: commonBoxDecoration,
+            child: TextField(
+              style: inputTextStyle,
+              controller: _idNum,
+              decoration: getCommonInputDecoration("Unique Id Number", null),
             ),
           ),
           const Padding(

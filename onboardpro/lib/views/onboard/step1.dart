@@ -28,7 +28,8 @@ class _MyPhoneState extends State<MyPhone> {
   String _dob = "";
   String _mobileVerify = "";
   String _faceVerify = "";
-  String _mob = ""; 
+  String _mob = "";
+  String _idNum = "";
   late final FirebaseCloudStorageOnboard _onboardingService;
   CloudOnboard? _concession;
 
@@ -58,6 +59,7 @@ class _MyPhoneState extends State<MyPhone> {
         gender: _gender,
         mobileVerified: _mobileVerify,
         faceVerified: _faceVerify,
+        idNum: _idNum,
       );
     }
   }
@@ -72,10 +74,11 @@ class _MyPhoneState extends State<MyPhone> {
       _surname = widgetConcession.surname;
       _address = widgetConcession.address;
       _dob = widgetConcession.dob;
-      _mob=widgetConcession.mobileNumber;
+      _mob = widgetConcession.mobileNumber;
       _gender = widgetConcession.gender;
       _mobileVerify = widgetConcession.mobileVerified;
       _faceVerify = widgetConcession.faceVerified;
+      _idNum = widgetConcession.idNum;
       final keyBytes2 = base64.decode(widgetConcession.key);
       final ivBytes2 = base64.decode(widgetConcession.iv);
 

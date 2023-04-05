@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 // import 'package:google_ml_kit/google_ml_kit.dart';
+import 'package:govt_documents_validator/govt_documents_validator.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:onboardpro/services/cloud/onboard/cloud_onboard.dart';
@@ -27,6 +30,7 @@ class _Step2State extends State<Step2> {
   File? _imageFile;
   String scannedText = "";
   // final _textRecognizer = TextRecognizer();
+  String _idNum = "";
   String _nameData = "";
   String _emailData = "";
   String _surname = "";
@@ -44,6 +48,7 @@ class _Step2State extends State<Step2> {
   String _address2 = "";
   String _gender2 = "";
   String _dob2 = "";
+  String _idType = "";
   late DateTime dateTime;
   late DateTime lastDate;
   CloudOnboard? _concession;
@@ -70,7 +75,7 @@ class _Step2State extends State<Step2> {
       final key2 = encrypt.Key(keyBytes2);
       final iv2 = encrypt.IV(ivBytes2);
       final encrypter2 = encrypt.Encrypter(encrypt.AES(key2));
-
+      _idNum = encrypter2.decrypt64(widgetConcession.idNum, iv: iv2);
       _mobilenumber2 =
           encrypter2.decrypt64(widgetConcession.mobileNumber, iv: iv2);
       _nameData2 = encrypter2.decrypt64(widgetConcession.name, iv: iv2);
@@ -115,6 +120,7 @@ class _Step2State extends State<Step2> {
         gender: _gender,
         mobileVerified: _mobileVerify,
         faceVerified: _faceVerify,
+        idNum: _idNum,
       );
     }
   }
@@ -224,6 +230,18 @@ class _Step2State extends State<Step2> {
                             height: 2,
                           ),
                           Text(
+                            "ID : $_idNum",
+                            style: const TextStyle(
+                              color: Color(0xff343434),
+                              fontSize: 17,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(
+                            height: 2,
+                          ),
+                          Text(
                             "Mobile Number : $_mobilenumber2",
                             style: const TextStyle(
                               color: Color(0xff343434),
@@ -248,7 +266,144 @@ class _Step2State extends State<Step2> {
                             textAlign: TextAlign.center,
                           ),
                           const SizedBox(
-                            height: 2,
+                            height: 20,
+                          ),
+                          const Text(
+                            "Select document type ",
+                            style: TextStyle(
+                              color: Color(0xff343434),
+                              fontSize: 25,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    _idType = "Aadhar";
+                                  });
+                                },
+                                child: Row(
+                                  children: [
+                                    _idType == "Aadhar"
+                                        ? SvgPicture.asset(
+                                            'assets/images/icon/checked.svg',
+                                            width: 17,
+                                            height: 17,
+                                          )
+                                        : Container(
+                                            width: 17,
+                                            height: 17,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              border: Border.all(
+                                                color: const Color(0xff000028),
+                                                width: 1,
+                                              ),
+                                            ),
+                                          ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    const Text(
+                                      'Aadhar',
+                                      style: TextStyle(
+                                        color: Color(0xff311b61),
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    _idType = "Pancard";
+                                  });
+                                },
+                                child: Row(
+                                  children: [
+                                    _idType == "Pancard"
+                                        ? SvgPicture.asset(
+                                            'assets/images/icon/checked.svg',
+                                            width: 17,
+                                            height: 17,
+                                          )
+                                        : Container(
+                                            width: 17,
+                                            height: 17,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              border: Border.all(
+                                                color: const Color(0xff000028),
+                                                width: 1,
+                                              ),
+                                            ),
+                                          ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    const Text(
+                                      'Pancard',
+                                      style: TextStyle(
+                                        color: Color(0xff311b61),
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    _idType = "Other";
+                                  });
+                                },
+                                child: Row(
+                                  children: [
+                                    _idType == "Other"
+                                        ? SvgPicture.asset(
+                                            'assets/images/icon/checked.svg',
+                                            width: 17,
+                                            height: 17,
+                                          )
+                                        : Container(
+                                            width: 17,
+                                            height: 17,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              border: Border.all(
+                                                color: const Color(0xff000028),
+                                                width: 1,
+                                              ),
+                                            ),
+                                          ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    const Text(
+                                      'Other',
+                                      style: TextStyle(
+                                        color: Color(0xff311b61),
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
 
                           const SizedBox(
@@ -363,88 +518,292 @@ class _Step2State extends State<Step2> {
                             children: [
                               ElevatedButton(
                                 onPressed: (() async {
-                                  FirebaseVisionImage visionImage =
-                                      FirebaseVisionImage.fromFile(
-                                          File(_imageFile!.path));
+                                  AadharValidator aadharValidator =
+                                      AadharValidator();
+                                  PANValidator pancardValidator =
+                                      PANValidator();
+                                  late final isAadharNum;
+                                  late final isPancardNum;
+                                  if (_idType == "Pancard") {
+                                    isPancardNum =
+                                        pancardValidator.validate(_idNum);
+                                  } else if (_idType == "Aadhar") {
+                                    isAadharNum =
+                                        aadharValidator.validate(_idNum);
+                                  }
 
-                                  FirebaseVision firebaseVision =
-                                      FirebaseVision.instance;
+                                  if (_idType == "Aadhar") {
+                                    FirebaseVisionImage visionImage =
+                                        FirebaseVisionImage.fromFile(
+                                            File(_imageFile!.path));
 
-                                  TextRecognizer textRecognizer =
-                                      firebaseVision.textRecognizer();
-                                  VisionText visionText = await textRecognizer
-                                      .processImage(visionImage);
-                                  String recognizedText = visionText.text;
-                                  // List<TextBlock> blocks = visionText.blocks;
-                                  // print(recognizedText);
-                                  // print(blocks);
+                                    FirebaseVision firebaseVision =
+                                        FirebaseVision.instance;
 
-                                  String text2 =
-                                      recognizedText.replaceAll('\n', ' ');
+                                    TextRecognizer textRecognizer =
+                                        firebaseVision.textRecognizer();
+                                    VisionText visionText = await textRecognizer
+                                        .processImage(visionImage);
+                                    String recognizedText = visionText.text;
+                                    // List<TextBlock> blocks = visionText.blocks;
+                                    // print(recognizedText);
+                                    // print(blocks);
 
-                                  final text = text2.toLowerCase();
+                                    String text2 =
+                                        recognizedText.replaceAll('\n', ' ');
 
-                                  final splitText =
-                                      text.split(RegExp(r'[ .,\/\\-]'));
-                                  final List<String> words = splitText.toList();
+                                    final text = text2.toLowerCase();
 
-                                  // Compute percentage of matching words
-                                  final name = _nameData2.toLowerCase();
-                                  final surname = _surname2.toLowerCase();
-                                  final address = _address2.toLowerCase();
-                                  final dob = _dob2.toLowerCase();
-                                  final gender = _gender2.toLowerCase();
-                                  final str =
-                                      "$name $surname $address $dob $gender";
-                                  final splitText2 =
-                                      str.split(RegExp(r'[ .,\/\\-]'));
-                                  final List<String> words2 =
-                                      splitText2.toList();
-                                  print(words2);
-                                  print(words);
-                                  double totalSimilarity = 0;
-                                  for (String word2 in words2) {
-                                    double maxSimilarity = 0;
-                                    for (String word in words) {
-                                      final double similarity =
-                                          _getSimilarity(word2, word);
-                                      if (similarity > maxSimilarity) {
-                                        maxSimilarity = similarity;
+                                    final splitText =
+                                        text.split(RegExp(r'[ .,\/\\-]'));
+                                    final List<String> words =
+                                        splitText.toList();
+
+                                    // Compute percentage of matching words
+                                    final name = _nameData2.toLowerCase();
+                                    final surname = _surname2.toLowerCase();
+                                    final address = _address2.toLowerCase();
+                                    final dob = _dob2.toLowerCase();
+                                    final gender = _gender2.toLowerCase();
+                                    final str =
+                                        "$name $surname $address $dob $gender";
+                                    final splitText2 =
+                                        str.split(RegExp(r'[ .,\/\\-]'));
+                                    final List<String> words2 =
+                                        splitText2.toList();
+                                    print(words2);
+                                    print(words);
+                                    double totalSimilarity = 0;
+                                    bool check = false;
+
+                                    for (String word2 in words2) {
+                                      double maxSimilarity = 0;
+                                      for (String word in words) {
+                                        final double similarity =
+                                            _getSimilarity(word2, word);
+                                        if (word
+                                            .contains(_idNum.toLowerCase())) {
+                                          check = true;
+                                        }
+                                        if (similarity > maxSimilarity) {
+                                          maxSimilarity = similarity;
+                                        }
                                       }
+                                      totalSimilarity += maxSimilarity;
                                     }
-                                    totalSimilarity += maxSimilarity;
-                                  }
-                                  final double percentage =
-                                      (totalSimilarity / words2.length) * 100;
+                                    final double percentage =
+                                        (totalSimilarity / words2.length) * 100;
 
-                                  if (percentage > 75 &&
-                                      words.isNotEmpty &&
-                                      words2.isNotEmpty) {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(SnackBar(
-                                      content: Text(
-                                          "Verified Successfully Match percentage is ${percentage.toStringAsFixed(2)}%"),
-                                    ));
-                                    setState(() {
-                                      _docVerify = "true";
-                                      _imgUrl = _imageUrl;
-                                    });
-                                  } else if (words.isEmpty || words2.isEmpty) {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(const SnackBar(
-                                      content: Text("No text found 0% "),
-                                    ));
+                                    if (percentage > 75 &&
+                                        words.isNotEmpty &&
+                                        words2.isNotEmpty &&
+                                        isAadharNum == true &&
+                                        check == true) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                        content: Text(
+                                            "Verified Successfully Match percentage is ${percentage.toStringAsFixed(2)}%"),
+                                      ));
+                                      setState(() {
+                                        _docVerify = "true";
+                                        _imgUrl = _imageUrl;
+                                      });
+                                    } else if (words.isEmpty ||
+                                        words2.isEmpty) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                        content: Text("No text found 0% "),
+                                      ));
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                        content: Text(
+                                            "Not Verified percentage is ${percentage.toStringAsFixed(2)}%"),
+                                      ));
+                                    }
+
+                                    if (_docVerify == "true") {
+                                      _saveConcessionIfTextNotEmpty();
+                                      Navigator.pop(context);
+                                    }
+                                  } else if (_idType == "Pancard") {
+                                    FirebaseVisionImage visionImage =
+                                        FirebaseVisionImage.fromFile(
+                                            File(_imageFile!.path));
+
+                                    FirebaseVision firebaseVision =
+                                        FirebaseVision.instance;
+
+                                    TextRecognizer textRecognizer =
+                                        firebaseVision.textRecognizer();
+                                    VisionText visionText = await textRecognizer
+                                        .processImage(visionImage);
+                                    String recognizedText = visionText.text;
+                                    // List<TextBlock> blocks = visionText.blocks;
+                                    // print(recognizedText);
+                                    // print(blocks);
+
+                                    String text2 =
+                                        recognizedText.replaceAll('\n', ' ');
+
+                                    final text = text2.toLowerCase();
+
+                                    final splitText =
+                                        text.split(RegExp(r'[ .,\/\\-]'));
+                                    final List<String> words =
+                                        splitText.toList();
+
+                                    // Compute percentage of matching words
+                                    final name = _nameData2.toLowerCase();
+                                    final surname = _surname2.toLowerCase();
+                                    final address = _address2.toLowerCase();
+                                    final dob = _dob2.toLowerCase();
+                                    final gender = _gender2.toLowerCase();
+                                    final str =
+                                        "$name $surname $address $dob $gender";
+                                    final splitText2 =
+                                        str.split(RegExp(r'[ .,\/\\-]'));
+                                    final List<String> words2 =
+                                        splitText2.toList();
+                                    print(words2);
+                                    print(words);
+                                    double totalSimilarity = 0;
+                                    bool check = false;
+                                    for (String word2 in words2) {
+                                      double maxSimilarity = 0;
+                                      for (String word in words) {
+                                        final double similarity =
+                                            _getSimilarity(word2, word);
+                                        if (word
+                                            .contains(_idNum.toLowerCase())) {
+                                          check = true;
+                                        }
+                                        if (similarity > maxSimilarity) {
+                                          maxSimilarity = similarity;
+                                        }
+                                      }
+                                      totalSimilarity += maxSimilarity;
+                                    }
+                                    final double percentage =
+                                        (totalSimilarity / words2.length) * 100;
+
+                                    if (percentage > 75 &&
+                                        words.isNotEmpty &&
+                                        words2.isNotEmpty &&
+                                        isPancardNum == true &&
+                                        check == true) {
+                                      print(isPancardNum);
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                        content: Text(
+                                            "Verified Successfully Match percentage is ${percentage.toStringAsFixed(2)}%"),
+                                      ));
+                                      setState(() {
+                                        _docVerify = "true";
+                                        _imgUrl = _imageUrl;
+                                      });
+                                    } else if (words.isEmpty ||
+                                        words2.isEmpty) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                        content: Text("No text found 0% "),
+                                      ));
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                        content: Text(
+                                            "Not Verified percentage is ${percentage.toStringAsFixed(2)}%"),
+                                      ));
+                                    }
+
+                                    if (_docVerify == "true") {
+                                      _saveConcessionIfTextNotEmpty();
+                                      Navigator.pop(context);
+                                    }
                                   } else {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(SnackBar(
-                                      content: Text(
-                                          "Not Verified percentage is ${percentage.toStringAsFixed(2)}%"),
-                                    ));
-                                  }
+                                    FirebaseVisionImage visionImage =
+                                        FirebaseVisionImage.fromFile(
+                                            File(_imageFile!.path));
 
-                                  if (_docVerify == "true") {
-                                    _saveConcessionIfTextNotEmpty();
-                                    Navigator.pop(context);
+                                    FirebaseVision firebaseVision =
+                                        FirebaseVision.instance;
+
+                                    TextRecognizer textRecognizer =
+                                        firebaseVision.textRecognizer();
+                                    VisionText visionText = await textRecognizer
+                                        .processImage(visionImage);
+                                    String recognizedText = visionText.text;
+                                    // List<TextBlock> blocks = visionText.blocks;
+                                    // print(recognizedText);
+                                    // print(blocks);
+
+                                    String text2 =
+                                        recognizedText.replaceAll('\n', ' ');
+
+                                    final text = text2.toLowerCase();
+
+                                    final splitText =
+                                        text.split(RegExp(r'[ .,\/\\-]'));
+                                    final List<String> words =
+                                        splitText.toList();
+
+                                    // Compute percentage of matching words
+                                    final name = _nameData2.toLowerCase();
+                                    final surname = _surname2.toLowerCase();
+                                    final address = _address2.toLowerCase();
+                                    final dob = _dob2.toLowerCase();
+                                    final gender = _gender2.toLowerCase();
+                                    final str =
+                                        "$name $surname $address $dob $gender";
+                                    final splitText2 =
+                                        str.split(RegExp(r'[ .,\/\\-]'));
+                                    final List<String> words2 =
+                                        splitText2.toList();
+                                    double totalSimilarity = 0;
+                                    for (String word2 in words2) {
+                                      double maxSimilarity = 0;
+                                      for (String word in words) {
+                                        final double similarity =
+                                            _getSimilarity(word2, word);
+                                        if (similarity > maxSimilarity) {
+                                          maxSimilarity = similarity;
+                                        }
+                                      }
+                                      totalSimilarity += maxSimilarity;
+                                    }
+                                    final double percentage =
+                                        (totalSimilarity / words2.length) * 100;
+
+                                    if (percentage > 75 &&
+                                        words.isNotEmpty &&
+                                        words2.isNotEmpty) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                        content: Text(
+                                            "Verified Successfully Match percentage is ${percentage.toStringAsFixed(2)}%"),
+                                      ));
+                                      setState(() {
+                                        _docVerify = "true";
+                                        _imgUrl = _imageUrl;
+                                      });
+                                    } else if (words.isEmpty ||
+                                        words2.isEmpty) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                        content: Text("No text found 0% "),
+                                      ));
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                        content: Text(
+                                            "Not Verified percentage is ${percentage.toStringAsFixed(2)}%"),
+                                      ));
+                                    }
+
+                                    if (_docVerify == "true") {
+                                      _saveConcessionIfTextNotEmpty();
+                                      Navigator.pop(context);
+                                    }
                                   }
                                 }),
                                 style: ElevatedButton.styleFrom(
@@ -457,7 +816,7 @@ class _Step2State extends State<Step2> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 20, vertical: 10),
                                   child: const Text(
-                                    'Apply',
+                                    'Verify',
                                     style: TextStyle(
                                       color: Color(0xffffffff),
                                       fontSize: 20,
