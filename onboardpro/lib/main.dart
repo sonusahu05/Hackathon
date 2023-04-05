@@ -65,7 +65,7 @@ Future main() async {
         onboardingRegister: (context) => const OnboardRegister(),
         onboarding: (context) => const OnboardingView(),
         step2: (context) => const Step2(),
-        step3: (context) => const Step3(),
+        // step3: (context) => const Step3(),
         steps:(context) => const OnboardingSteps(),
         face :(context) => const FaceIO(),
       },
