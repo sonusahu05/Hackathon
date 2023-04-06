@@ -66,8 +66,8 @@ Future main() async {
         onboarding: (context) => const OnboardingView(),
         step2: (context) => const Step2(),
         good: (context) => const Good(),
-        steps:(context) => const OnboardingSteps(),
-        face :(context) => const FaceIO(),
+        steps: (context) => const OnboardingSteps(),
+        face: (context) => const FaceIO(),
       },
     ),
   );
@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
             // } else if (userEmail == adminEvents) {
             //   return const EventsAdd();
             // } else {
-              return const BottomNavBar();
+            return const BottomNavBar();
             // }
           } else if (state is AuthStateNeedsVerification) {
             return const VerifyEmailView();
@@ -138,17 +138,22 @@ class _HomePageState extends State<HomePage> {
 class OnBoarding extends StatefulWidget {
   final bool showHome;
   const OnBoarding({super.key, required this.showHome});
+  static List<String> images = [
+    'assets/images/icon/svg1.png',
+    'assets/images/icon/svg2.png',
+    'assets/images/icon/svg3.png',
+  ];
   static const titles = [
-    'Notes',
-    'Event Updates',
-    'Concession',
+    'Start Onboarding',
+    '100% Secure',
+    'Saving Time',
     // 'onboardpro'
   ];
 
   static const descriptions = [
-    'Our notes feature offers a personalized experience for managing your notes with features such as writing, saving, sharing, updating and deleting. Keep track of your thoughts, ideas and information all in one place. Try it now for a simple and user-friendly note-taking solution.',
-    'Stay informed on college events with our platform. Get comprehensive information on future events and never miss out. Check it out now.',
-    'Our platform offers a digital railway concession application process for students with the ability to check the status of their application. No more waiting in lines or searching for paper forms, apply now for a quick and efficient experience.',
+    'Start the onboarding by filling your personal \ndetails and document verification',
+    'Data is encrypted and safe.',
+    'We promise it will be Quick.',
   ];
   @override
   State<OnBoarding> createState() => _OnBoardingState();
@@ -176,17 +181,13 @@ class _OnBoardingState extends State<OnBoarding> {
         child: Column(
           children: <Widget>[
             const SizedBox(
-              height: 100,
-            ),
-            Image.asset(
-              'assets/images/icon/spit_logo.png',
               height: 200,
             ),
             const SizedBox(
               height: 40,
             ),
             SizedBox(
-              height: 330,
+              height: 450,
               child: ScrollPageView(
                 allowImplicitScrolling: false,
                 isTimer: false,
@@ -201,6 +202,13 @@ class _OnBoardingState extends State<OnBoarding> {
                   for (var i = 0; i < OnBoarding.titles.length; i++)
                     Column(
                       children: [
+                        Image.asset(
+                          OnBoarding.images[i],
+                          height: 200,
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
                         Text(
                           OnBoarding.titles[i],
                           style: GoogleFonts.jost(

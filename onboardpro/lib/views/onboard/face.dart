@@ -234,7 +234,7 @@ class _FaceIOState extends State<FaceIO> {
         // ignore: deprecated_member_use
         child: TextButton(
             style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+              foregroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 0, 0, 0)),
               backgroundColor: MaterialStateProperty.all<Color>(Colors.black12),
             ),
             onPressed: onPress,
@@ -346,7 +346,7 @@ class _FaceIOState extends State<FaceIO> {
                     child: Text(
                       "Match: $_match",
                       style: const TextStyle(
-                        color: Color(0xff000028),
+                        color: Color.fromARGB(255, 22, 230, 3),
                         fontSize: 20,
                         fontWeight: FontWeight.w500,
                       ),

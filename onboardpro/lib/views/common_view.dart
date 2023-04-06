@@ -195,12 +195,7 @@ class _CommonViewState extends State<CommonView> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               InkWell(
-                onTap: () {
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                    eventView,
-                    (route) => true,
-                  );
-                },
+                onTap: () {},
                 child: Container(
                     width: 160,
                     margin: const EdgeInsets.symmetric(
@@ -281,12 +276,7 @@ class _CommonViewState extends State<CommonView> {
                     )),
               ),
               InkWell(
-                onTap: () {
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                    step2,
-                    (route) => true,
-                  );
-                },
+                onTap: () {},
                 child: Container(
                     width: 160,
                     margin: const EdgeInsets.symmetric(
@@ -366,12 +356,7 @@ class _CommonViewState extends State<CommonView> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               InkWell(
-                onTap: () {
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                    step3,
-                    (route) => true,
-                  );
-                },
+                onTap: () {},
                 child: Container(
                     width: 160,
                     margin: const EdgeInsets.symmetric(
