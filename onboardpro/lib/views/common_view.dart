@@ -163,7 +163,7 @@ class _CommonViewState extends State<CommonView> {
                               'Apply',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 10,
+                                fontSize: 15,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -184,7 +184,7 @@ class _CommonViewState extends State<CommonView> {
           ),
           const Padding(
             padding: EdgeInsets.only(left: 27.0, bottom: 8, top: 3),
-            child: Text('Complete this steps to Onboard',
+            child: Text('    Complete this steps to Onboard',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 21,
@@ -255,27 +255,26 @@ class _CommonViewState extends State<CommonView> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: const [
-                                Text('Step 1',
+                                Text('  Step 1',
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 18,
+                                      fontSize: 20,
                                       fontWeight: FontWeight.w600,
                                     )),
                                 SizedBox(
                                   width: 2,
                                 ),
-                                Icon(
-                                  Icons.arrow_forward,
-                                  size: 19,
-                                ),
+                                
                               ],
                             ),
+                            
                             const Text('Phone Verification',
                                 style: TextStyle(
                                   color: Color(0xff656565),
                                   fontSize: 11,
                                   fontWeight: FontWeight.w600,
                                 )),
+                                
                           ],
                         ),
                       ],
@@ -338,19 +337,16 @@ class _CommonViewState extends State<CommonView> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: const [
-                                Text('Step 2',
+                                Text('  Step 2',
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 18,
+                                      fontSize: 20,
                                       fontWeight: FontWeight.w600,
                                     )),
                                 SizedBox(
                                   width: 2,
                                 ),
-                                Icon(
-                                  Icons.arrow_forward,
-                                  size: 19,
-                                ),
+                              
                               ],
                             ),
                             const Text('Document Upload and verification',
@@ -424,19 +420,16 @@ class _CommonViewState extends State<CommonView> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: const [
-                                Text('Step 3',
+                                Text('  Step 3',
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 18,
+                                      fontSize: 20,
                                       fontWeight: FontWeight.w600,
                                     )),
                                 SizedBox(
                                   width: 2,
                                 ),
-                                Icon(
-                                  Icons.arrow_forward,
-                                  size: 19,
-                                ),
+                                
                               ],
                             ),
                             const Text('Face Verification',
@@ -504,19 +497,16 @@ class _CommonViewState extends State<CommonView> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: const [
-                                Text('Congrats',
+                                Text(' Congrats',
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 18,
+                                      fontSize: 20,
                                       fontWeight: FontWeight.w600,
                                     )),
                                 SizedBox(
                                   width: 2,
                                 ),
-                                Icon(
-                                  Icons.arrow_forward,
-                                  size: 19,
-                                ),
+                               
                               ],
                             ),
                             const Text('You are now a verified user',

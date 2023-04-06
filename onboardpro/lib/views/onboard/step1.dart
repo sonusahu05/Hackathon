@@ -6,7 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:onboardpro/services/cloud/onboard/cloud_onboard.dart';
 import 'package:onboardpro/services/cloud/onboard/firebase_cloud_onboard_storage.dart';
 import 'package:onboardpro/utilities/generics/get_arguments.dart';
-import 'package:http/http.dart' as http;
 
 class MyPhone extends StatefulWidget {
   const MyPhone({Key? key}) : super(key: key);
@@ -34,25 +33,12 @@ class _MyPhoneState extends State<MyPhone> {
   late final FirebaseCloudStorageOnboard _onboardingService;
   CloudOnboard? _concession;
 
-  Future<http.Response> postRequest(String email) async {
-    var url = 'https://proud-will-380104.el.r.appspot.com/phone';
-    Map data = {'email': email};
-    //encode Map to JSON
-    var body = json.encode(data);
-    var response = await http.post(Uri.parse(url),
-        headers: {"Content-Type": "application/json"}, body: body);
-    print("${response.statusCode}");
-    print("${response.body}");
-    return response;
-  }
-
   Future<void> _navigateAndDisplaySelection(BuildContext context) async {
     final result = await Navigator.of(context).pushNamed(verify);
     if (!mounted) return;
     if (result == true) {
       _mobileVerify = "true";
       _saveConcessionIfTextNotEmpty();
-      postRequest(_emailData);
       Navigator.of(context).pop(true);
     }
   }
@@ -99,6 +85,7 @@ class _MyPhoneState extends State<MyPhone> {
       final key2 = encrypt.Key(keyBytes2);
       final iv2 = encrypt.IV(ivBytes2);
       final encrypter2 = encrypt.Encrypter(encrypt.AES(key2));
+
       _mobilenumber =
           encrypter2.decrypt64(widgetConcession.mobileNumber, iv: iv2);
     }
@@ -155,6 +142,9 @@ class _MyPhoneState extends State<MyPhone> {
                       const SizedBox(
                         height: 30,
                       ),
+                      const SizedBox(
+                                height: 20,
+                              ),
                       Container(
                         height: 55,
                         decoration: BoxDecoration(
@@ -166,6 +156,9 @@ class _MyPhoneState extends State<MyPhone> {
                             const SizedBox(
                               width: 10,
                             ),
+                            const SizedBox(
+                                height: 20,
+                              ),
                             SizedBox(
                               width: 40,
                               child: TextField(
@@ -176,6 +169,9 @@ class _MyPhoneState extends State<MyPhone> {
                                 ),
                               ),
                             ),
+                            const SizedBox(
+                                height: 20,
+                              ),
                             const Text(
                               "|",
                               style: TextStyle(
@@ -183,6 +179,9 @@ class _MyPhoneState extends State<MyPhone> {
                                   color: Colors.grey,
                                   backgroundColor: Colors.white),
                             ),
+                            const SizedBox(
+                                height: 20,
+                              ),
                             const SizedBox(
                               width: 10,
                             ),
@@ -198,7 +197,7 @@ class _MyPhoneState extends State<MyPhone> {
                         height: 45,
                         child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.green.shade600,
+                                backgroundColor: Color.fromARGB(255, 5, 5, 5),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10))),
                             onPressed: () async {
