@@ -153,7 +153,7 @@ class _Step2State extends State<Step2> {
         ),
         centerTitle: true,
         title: const Text(
-          'Step 2 Document Verification',
+          'Document Verification',
           style: TextStyle(
             color: Color(0xff2af6ff),
             fontSize: 24,
@@ -505,10 +505,10 @@ class _Step2State extends State<Step2> {
                               }),
                               child: Container(
                                 alignment: Alignment.center,
-                                height: 50,
-                                width: 150,
+                                height: 45,
+                                width: 145,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(25),
+                                  borderRadius: BorderRadius.circular(10),
                                   color: const Color(0xff000028),
                                 ),
                                 child: const Text(
