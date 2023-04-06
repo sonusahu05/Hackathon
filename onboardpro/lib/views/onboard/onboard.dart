@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:onboardpro/services/cloud/onboard/cloud_onboard.dart';
 import 'package:onboardpro/services/cloud/onboard/firebase_cloud_onboard_storage.dart';
 import 'package:onboardpro/utilities/generics/get_arguments.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class OnboardingSteps extends StatefulWidget {
   const OnboardingSteps({super.key});
@@ -89,8 +91,10 @@ class _OnboardingStepsState extends State<OnboardingSteps> {
       Navigator.pop(context);
     }
   }
-   Future<void> _navigateAndDisplaySelection4(
+
+  Future<void> _navigateAndDisplaySelection4(
       BuildContext context, CloudOnboard concession) async {
+    postRequest(_emailData);
     final result = await Navigator.of(context).pushNamed(
       good,
       arguments: concession,
@@ -99,6 +103,18 @@ class _OnboardingStepsState extends State<OnboardingSteps> {
     if (result == true) {
       Navigator.pop(context);
     }
+  }
+
+  Future<http.Response> postRequest(String email) async {
+    var url = 'https://proud-will-380104.el.r.appspot.com/onboard';
+    Map data = {'email': email};
+    //encode Map to JSON
+    var body = json.encode(data);
+    var response = await http.post(Uri.parse(url),
+        headers: {"Content-Type": "application/json"}, body: body);
+    print("${response.statusCode}");
+    print("${response.body}");
+    return response;
   }
 
   Future<void> getExistingOnboard(BuildContext context) async {
@@ -193,7 +209,9 @@ class _OnboardingStepsState extends State<OnboardingSteps> {
                       children: [
                         InkWell(
                           onTap: () {
-                            if (_docVerify == "false") {
+                            if (_docVerify == "false" &&
+                                _mobileVerify == "false" &&
+                                _faceVerify == "false") {
                               _navigateAndDisplaySelection1(
                                   context, _concession!);
                             }
@@ -293,7 +311,9 @@ class _OnboardingStepsState extends State<OnboardingSteps> {
                         ),
                         InkWell(
                           onTap: () {
-                            if (_docVerify == "false") {
+                            if (_docVerify == "false" &&
+                                _mobileVerify == "true" &&
+                                _faceVerify == "false") {
                               _navigateAndDisplaySelection2(
                                   context, _concession!);
                             }
@@ -396,7 +416,9 @@ class _OnboardingStepsState extends State<OnboardingSteps> {
                       children: [
                         InkWell(
                           onTap: () {
-                            if (_faceVerify == "false") {
+                            if (_docVerify == "true" &&
+                                _mobileVerify == "true" &&
+                                _faceVerify == "false") {
                               _navigateAndDisplaySelection3(
                                   context, _concession!);
                             }
@@ -492,7 +514,19 @@ class _OnboardingStepsState extends State<OnboardingSteps> {
                         ),
                         InkWell(
                           onTap: () {
-                            _navigateAndDisplaySelection4(context, _concession!);
+                            if (_docVerify == "true" &&
+                                _mobileVerify == "true" &&
+                                _faceVerify == "true") {
+                              _saveConcessionIfTextNotEmpty();
+                              _navigateAndDisplaySelection4(
+                                  context, _concession!);
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Please complete all steps'),
+                                ),
+                              );
+                            }
                           },
                           child: Container(
                               width: 160,

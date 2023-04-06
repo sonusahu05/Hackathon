@@ -1,9 +1,5 @@
 import 'dart:convert';
-import 'dart:ffi';
-
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 // import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:govt_documents_validator/govt_documents_validator.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
@@ -169,7 +165,7 @@ class _GoodState extends State<Good> {
                         child: Column(
                           children: [
                             Text(
-                              "Hello $_nameData2 $_surname2",
+                              "Hello, $_nameData2 $_surname2",
                               style: const TextStyle(
                                 fontSize: 36,
                                 fontWeight: FontWeight.bold,

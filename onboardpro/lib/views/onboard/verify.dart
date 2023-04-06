@@ -1,4 +1,3 @@
-// --------------------------------------------MOBILE NUMBER OTP VERIFICATION VIEW---------------------------------
 
 import 'package:flutter/material.dart';
 import 'package:onboardpro/constants/routes.dart';

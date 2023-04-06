@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:ffi';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'dart:io' as io;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -60,7 +62,17 @@ class _FaceIOState extends State<FaceIO> {
       _imgUrl = widgetConcession.imageUrl;
     }
   }
-
+  Future<http.Response> postRequest(String email) async {
+    var url = 'https://proud-will-380104.el.r.appspot.com/face';
+    Map data = {'email': email};
+    //encode Map to JSON
+    var body = json.encode(data);
+    var response = await http.post(Uri.parse(url),
+        headers: {"Content-Type": "application/json"}, body: body);
+    print("${response.statusCode}");
+    print("${response.body}");
+    return response;
+  }
   void _saveConcessionIfTextNotEmpty() async {
     final concession = _concession;
     if (concession != null) {
@@ -359,6 +371,7 @@ class _FaceIOState extends State<FaceIO> {
                         _liveness == "passed") {
                       _faceVerify = "true";
                       _saveConcessionIfTextNotEmpty();
+                      postRequest(_emailData);
                       Navigator.of(context).pop(true);
                     }
                   }),
