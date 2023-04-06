@@ -1,5 +1,6 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
+import 'dart:ffi';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -102,18 +103,6 @@ class _Step2State extends State<Step2> {
     return similarity;
   }
 
-  Future<http.Response> postRequest(String email) async {
-    var url = 'https://proud-will-380104.el.r.appspot.com/doc';
-    Map data = {'email': email};
-    //encode Map to JSON
-    var body = json.encode(data);
-    var response = await http.post(Uri.parse(url),
-        headers: {"Content-Type": "application/json"}, body: body);
-    print("${response.statusCode}");
-    print("${response.body}");
-    return response;
-  }
-
   void _saveConcessionIfTextNotEmpty() async {
     final concession = _concession;
     if (concession != null) {
@@ -153,9 +142,9 @@ class _Step2State extends State<Step2> {
         ),
         centerTitle: true,
         title: const Text(
-          'Document Verification',
+          ' Document Verification',
           style: TextStyle(
-            color: Color(0xff2af6ff),
+            color: Color.fromARGB(255, 255, 255, 255),
             fontSize: 24,
             fontWeight: FontWeight.w600,
           ),
@@ -194,10 +183,12 @@ class _Step2State extends State<Step2> {
                           ),
                           Text(
                             "Name: $_nameData2 $_surname2",
+                            
                             style: const TextStyle(
+
                               color: Color(0xff1e1e1e),
                               fontSize: 22,
-                              fontWeight: FontWeight.w800,
+                              fontWeight: FontWeight.w500,
                             ),
                             textAlign: TextAlign.center,
                           ),
@@ -207,9 +198,9 @@ class _Step2State extends State<Step2> {
                           Text(
                             "Address : $_address2",
                             style: const TextStyle(
-                              color: Color(0xff1e1e1e),
-                              fontSize: 22,
-                              fontWeight: FontWeight.w800,
+                              color: Color(0xff343434),
+                              fontSize: 17,
+                              fontWeight: FontWeight.w500,
                             ),
                             textAlign: TextAlign.center,
                           ),
@@ -279,143 +270,138 @@ class _Step2State extends State<Step2> {
                           const SizedBox(
                             height: 20,
                           ),
-                          const Text(
-                            "Select document type ",
-                            style: TextStyle(
-                              color: Color(0xff343434),
-                              fontSize: 25,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    _idType = "Aadhar";
-                                  });
-                                },
-                                child: Row(
-                                  children: [
-                                    _idType == "Aadhar"
-                                        ? SvgPicture.asset(
-                                            'assets/images/icon/checked.svg',
-                                            width: 17,
-                                            height: 17,
-                                          )
-                                        : Container(
-                                            width: 17,
-                                            height: 17,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              border: Border.all(
-                                                color: const Color(0xff000028),
-                                                width: 1,
-                                              ),
-                                            ),
-                                          ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    const Text(
-                                      'Aadhar',
-                                      style: TextStyle(
-                                        color: Color(0xff311b61),
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    _idType = "Pancard";
-                                  });
-                                },
-                                child: Row(
-                                  children: [
-                                    _idType == "Pancard"
-                                        ? SvgPicture.asset(
-                                            'assets/images/icon/checked.svg',
-                                            width: 17,
-                                            height: 17,
-                                          )
-                                        : Container(
-                                            width: 17,
-                                            height: 17,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              border: Border.all(
-                                                color: const Color(0xff000028),
-                                                width: 1,
-                                              ),
-                                            ),
-                                          ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    const Text(
-                                      'Pancard',
-                                      style: TextStyle(
-                                        color: Color(0xff311b61),
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    _idType = "Other";
-                                  });
-                                },
-                                child: Row(
-                                  children: [
-                                    _idType == "Other"
-                                        ? SvgPicture.asset(
-                                            'assets/images/icon/checked.svg',
-                                            width: 17,
-                                            height: 17,
-                                          )
-                                        : Container(
-                                            width: 17,
-                                            height: 17,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              border: Border.all(
-                                                color: const Color(0xff000028),
-                                                width: 1,
-                                              ),
-                                            ),
-                                          ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    const Text(
-                                      'Other',
-                                      style: TextStyle(
-                                        color: Color(0xff311b61),
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+                        Column(
+  crossAxisAlignment: CrossAxisAlignment.center,
+  children: [
+    const Text(
+      "Select document type",
+      style: TextStyle(
+        color: Color.fromRGBO(0, 0, 0, 1),
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+      ),
+      textAlign: TextAlign.center,
+    ),
+    const SizedBox(height: 10),
+    Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        InkWell(
+          onTap: () {
+            setState(() {
+              _idType = "Aadhar";
+            });
+          },
+          child: Row(
+            children: [
+              _idType == "Aadhar"
+                  ? const Icon(
+                      Icons.check_circle,
+                      color: Color(0xff43b581),
+                      size: 18,
+                    )
+                  : Container(
+                      width: 18,
+                      height: 18,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        border: Border.all(
+                          color: Color(0xff343434),
+                          width: 1,
+                        ),
+                      ),
+                    ),
+              const SizedBox(width: 10),
+              Text(
+                "Aadhar",
+                style: TextStyle(
+                  color: Color(0xff343434),
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+            ],
+          ),
+        ),
+        InkWell(
+          onTap: () {
+            setState(() {
+              _idType = "Pancard";
+            });
+          },
+          child: Row(
+            children: [
+              _idType == "Pancard"
+                  ? const Icon(
+                      Icons.check_circle,
+                      color: Color(0xff43b581),
+                      size: 18,
+                    )
+                  : Container(
+                      width: 18,
+                      height: 18,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        border: Border.all(
+                          color: Color(0xff6f7581),
+                          width: 1,
+                        ),
+                      ),
+                    ),
+              SizedBox(width: 10),
+              const Text(
+                "Pancard",
+                style: TextStyle(
+                  color: Color(0xff343434),
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+            ],
+          ),
+        ),
+        InkWell(
+          onTap: () {
+            setState(() {
+              _idType = "Other";
+            });
+          },
+          child: Row(
+            children: [
+              _idType == "Other"
+                  ? const Icon(
+                      Icons.check_circle,
+                      color: Color(0xff43b581),
+                      size: 18,
+                    )
+                  : Container(
+                      width: 18,
+                      height: 18,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        border: Border.all(
+                          color: Color(0xff343434),
+                          width: 1,
+                        ),
+                      ),
+                    ),
+              SizedBox(width: 10),
+              const Text(
+                "Other",
+                style: TextStyle(
+                  color: Color(0xff343434),
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  ],
+),
+                        
 
                           const SizedBox(
                             height: 18,
@@ -449,7 +435,7 @@ class _Step2State extends State<Step2> {
                                         'No image selected', // Add a message to display if no image is selected.
                                         style: TextStyle(
                                           color: Colors.grey[600],
-                                          fontSize: 18,
+                                          fontSize: 15,
                                           fontWeight: FontWeight.w500,
                                         ),
                                       ),
@@ -506,7 +492,7 @@ class _Step2State extends State<Step2> {
                               child: Container(
                                 alignment: Alignment.center,
                                 height: 45,
-                                width: 145,
+                                width: 135,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   color: const Color(0xff000028),
@@ -635,7 +621,6 @@ class _Step2State extends State<Step2> {
 
                                     if (_docVerify == "true") {
                                       _saveConcessionIfTextNotEmpty();
-                                      postRequest(_emailData);
                                       Navigator.of(context).pop(true);
                                       ;
                                     }
@@ -731,9 +716,8 @@ class _Step2State extends State<Step2> {
 
                                     if (_docVerify == "true") {
                                       _saveConcessionIfTextNotEmpty();
-                                      postRequest(_emailData);
                                       Navigator.of(context).pop(true);
-                                      
+                                      ;
                                     }
                                   } else {
                                     FirebaseVisionImage visionImage =
@@ -817,7 +801,6 @@ class _Step2State extends State<Step2> {
 
                                     if (_docVerify == "true") {
                                       _saveConcessionIfTextNotEmpty();
-                                      postRequest(_emailData);
                                       Navigator.of(context).pop(true);
                                     }
                                   }

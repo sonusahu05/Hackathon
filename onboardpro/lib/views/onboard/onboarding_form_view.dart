@@ -100,7 +100,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                                 height: 20,
                               ),
                               const Text(
-                                'You may proceed to the next step to complete the kyc',
+                                '',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 16,
