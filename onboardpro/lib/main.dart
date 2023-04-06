@@ -3,13 +3,13 @@ import 'package:onboardpro/services/auth/auth_service.dart';
 import 'package:onboardpro/services/auth/firebase_auth_provider.dart';
 import 'package:onboardpro/views/common_view.dart';
 import 'package:onboardpro/views/onboard/face.dart';
+import 'package:onboardpro/views/onboard/good_to_go.dart';
 import 'package:onboardpro/views/onboard/onboard.dart';
 import 'package:onboardpro/views/onboard/verify.dart';
 import 'package:onboardpro/views/onboard/step1.dart';
 import 'package:onboardpro/views/onboard/onboard_register.dart';
 import 'package:onboardpro/views/onboard/onboarding_form_view.dart';
 import 'package:onboardpro/views/onboard/step2.dart';
-import 'package:onboardpro/views/onboard/step3.dart';
 import 'package:onboardpro/views/profile/about.dart';
 import 'package:onboardpro/views/profile/profile.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +65,7 @@ Future main() async {
         onboardingRegister: (context) => const OnboardRegister(),
         onboarding: (context) => const OnboardingView(),
         step2: (context) => const Step2(),
-        // step3: (context) => const Step3(),
+        good: (context) => const Good(),
         steps:(context) => const OnboardingSteps(),
         face :(context) => const FaceIO(),
       },

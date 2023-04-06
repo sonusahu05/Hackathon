@@ -27,3 +27,4 @@ const verify = "/verify/";
 const back = "/back.dart/";
 const steps = "/steps.dart/";
 const face = "/face.dart/";
+const good = "/good.dart/";

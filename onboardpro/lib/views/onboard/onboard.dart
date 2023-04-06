@@ -89,6 +89,17 @@ class _OnboardingStepsState extends State<OnboardingSteps> {
       Navigator.pop(context);
     }
   }
+   Future<void> _navigateAndDisplaySelection4(
+      BuildContext context, CloudOnboard concession) async {
+    final result = await Navigator.of(context).pushNamed(
+      good,
+      arguments: concession,
+    );
+    if (!mounted) return;
+    if (result == true) {
+      Navigator.pop(context);
+    }
+  }
 
   Future<void> getExistingOnboard(BuildContext context) async {
     final widgetConcession = context.getArgument<CloudOnboard>();
@@ -481,7 +492,7 @@ class _OnboardingStepsState extends State<OnboardingSteps> {
                         ),
                         InkWell(
                           onTap: () {
-                            // _navigateAndDisplaySelection4(context, _concession!);
+                            _navigateAndDisplaySelection4(context, _concession!);
                           },
                           child: Container(
                               width: 160,
