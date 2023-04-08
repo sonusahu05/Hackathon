@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:onboardpro/services/cloud/onboard/cloud_onboard.dart';
 import 'package:onboardpro/services/cloud/onboard/firebase_cloud_onboard_storage.dart';
 import 'package:onboardpro/utilities/generics/get_arguments.dart';
+import 'package:http/http.dart' as http;
 
 class MyPhone extends StatefulWidget {
   const MyPhone({Key? key}) : super(key: key);
@@ -39,8 +40,21 @@ class _MyPhoneState extends State<MyPhone> {
     if (result == true) {
       _mobileVerify = "true";
       _saveConcessionIfTextNotEmpty();
+      postRequest(_emailData);
       Navigator.of(context).pop(true);
     }
+  }
+
+  Future<http.Response> postRequest(String email) async {
+    var url = 'https://proud-will-380104.el.r.appspot.com/phone';
+    Map data = {'email': email};
+    //encode Map to JSON
+    var body = json.encode(data);
+    var response = await http.post(Uri.parse(url),
+        headers: {"Content-Type": "application/json"}, body: body);
+    print("${response.statusCode}");
+    print("${response.body}");
+    return response;
   }
 
   void _saveConcessionIfTextNotEmpty() async {
@@ -143,8 +157,8 @@ class _MyPhoneState extends State<MyPhone> {
                         height: 30,
                       ),
                       const SizedBox(
-                                height: 20,
-                              ),
+                        height: 20,
+                      ),
                       Container(
                         height: 55,
                         decoration: BoxDecoration(
@@ -157,8 +171,8 @@ class _MyPhoneState extends State<MyPhone> {
                               width: 10,
                             ),
                             const SizedBox(
-                                height: 20,
-                              ),
+                              height: 20,
+                            ),
                             SizedBox(
                               width: 40,
                               child: TextField(
@@ -170,8 +184,8 @@ class _MyPhoneState extends State<MyPhone> {
                               ),
                             ),
                             const SizedBox(
-                                height: 20,
-                              ),
+                              height: 20,
+                            ),
                             const Text(
                               "|",
                               style: TextStyle(
@@ -180,8 +194,8 @@ class _MyPhoneState extends State<MyPhone> {
                                   backgroundColor: Colors.white),
                             ),
                             const SizedBox(
-                                height: 20,
-                              ),
+                              height: 20,
+                            ),
                             const SizedBox(
                               width: 10,
                             ),

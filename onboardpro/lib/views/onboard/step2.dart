@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:ffi';
-
+import 'package:http/http.dart' as http;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -124,7 +124,17 @@ class _Step2State extends State<Step2> {
       );
     }
   }
-
+  Future<http.Response> postRequest(String email) async {
+    var url = 'https://proud-will-380104.el.r.appspot.com/doc';
+    Map data = {'email': email};
+    //encode Map to JSON
+    var body = json.encode(data);
+    var response = await http.post(Uri.parse(url),
+        headers: {"Content-Type": "application/json"}, body: body);
+    print("${response.statusCode}");
+    print("${response.body}");
+    return response;
+  }
   @override
   Widget build(BuildContext context) {
     final Storage storage = Storage();
@@ -621,6 +631,7 @@ class _Step2State extends State<Step2> {
 
                                     if (_docVerify == "true") {
                                       _saveConcessionIfTextNotEmpty();
+                                      postRequest(_emailData);
                                       Navigator.of(context).pop(true);
                                       ;
                                     }
@@ -716,6 +727,7 @@ class _Step2State extends State<Step2> {
 
                                     if (_docVerify == "true") {
                                       _saveConcessionIfTextNotEmpty();
+                                      postRequest(_emailData);
                                       Navigator.of(context).pop(true);
                                       ;
                                     }
@@ -801,6 +813,7 @@ class _Step2State extends State<Step2> {
 
                                     if (_docVerify == "true") {
                                       _saveConcessionIfTextNotEmpty();
+                                      postRequest(_emailData);
                                       Navigator.of(context).pop(true);
                                     }
                                   }

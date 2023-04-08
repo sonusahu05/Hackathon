@@ -122,6 +122,7 @@ class _MyVerifyState extends State<MyVerify> {
 
                         // Sign the user in (or link) with the credential
                         await auth.signInWithCredential(credential);
+                        
                         Navigator.of(context).pop(true);
                       } catch (e) {
                         print("Invalid OTP !");
