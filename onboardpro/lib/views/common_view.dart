@@ -242,14 +242,14 @@ class _CommonViewState extends State<CommonView> {
                         const SizedBox(
                           height: 25,
                         ),
-                        Column(
+                        const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
-                              children: const [
+                              children: [
                                 Text('  Step 1',
                                     style: TextStyle(
                                       color: Colors.black,
@@ -263,7 +263,7 @@ class _CommonViewState extends State<CommonView> {
                               ],
                             ),
                             
-                            const Text('Phone Verification',
+                            Text('Phone Verification',
                                 style: TextStyle(
                                   color: Color(0xff656565),
                                   fontSize: 11,
@@ -319,14 +319,14 @@ class _CommonViewState extends State<CommonView> {
                         const SizedBox(
                           height: 25,
                         ),
-                        Column(
+                        const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
-                              children: const [
+                              children: [
                                 Text('  Step 2',
                                     style: TextStyle(
                                       color: Colors.black,
@@ -339,7 +339,7 @@ class _CommonViewState extends State<CommonView> {
                               
                               ],
                             ),
-                            const Text('Document Upload and verification',
+                            Text('Document Upload and verification',
                                 style: TextStyle(
                                   color: Color(0xff656565),
                                   fontSize: 11,
@@ -397,14 +397,14 @@ class _CommonViewState extends State<CommonView> {
                         const SizedBox(
                           height: 25,
                         ),
-                        Column(
+                        const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
-                              children: const [
+                              children: [
                                 Text('  Step 3',
                                     style: TextStyle(
                                       color: Colors.black,
@@ -417,7 +417,7 @@ class _CommonViewState extends State<CommonView> {
                                 
                               ],
                             ),
-                            const Text('Face Verification',
+                            Text('Face Verification',
                                 style: TextStyle(
                                   color: Color(0xff656565),
                                   fontSize: 11,
@@ -474,14 +474,14 @@ class _CommonViewState extends State<CommonView> {
                         const SizedBox(
                           height: 25,
                         ),
-                        Column(
+                        const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
-                              children: const [
+                              children: [
                                 Text(' Congrats',
                                     style: TextStyle(
                                       color: Colors.black,
@@ -494,7 +494,7 @@ class _CommonViewState extends State<CommonView> {
                                
                               ],
                             ),
-                            const Text('You are now a verified user',
+                            Text('You are now a verified user',
                                 style: TextStyle(
                                   color: Color(0xff656565),
                                   fontSize: 11,

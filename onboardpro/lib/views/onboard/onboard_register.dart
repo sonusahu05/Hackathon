@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:encrypt/encrypt.dart';
 import 'package:onboardpro/services/auth/auth_service.dart';
 import 'package:onboardpro/services/cloud/onboard/cloud_onboard.dart';
@@ -8,6 +7,7 @@ import 'package:onboardpro/utilities/dialogs/delete_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:encrypt/encrypt.dart' as encrypt;
+import 'package:http/http.dart' as http;
 
 class OnboardRegister extends StatefulWidget {
   const OnboardRegister({super.key});
@@ -48,6 +48,17 @@ class _OnboardRegisterState extends State<OnboardRegister> {
     _address.text = '';
     _mobileNumber.text = '';
     super.initState();
+  }
+
+  Future<http.Response> insertData(Map<String, dynamic> data) async {
+    var url = 'http://10.0.2.2:5000/api/nation';
+    print(data);
+    var body = json.encode(data);
+    var response = await http.post(Uri.parse(url),
+        headers: {"Content-Type": "application/json"}, body: body);
+    print("${response.statusCode}");
+    print("${response.body}");
+    return response;
   }
 
   Future<CloudOnboard> createNewOnboard() async {
@@ -498,6 +509,26 @@ class _OnboardRegisterState extends State<OnboardRegister> {
                       _dob != null &&
                       _mobileNumber.text != "") {
                     createNewOnboard();
+
+                    final data = {
+                      'address': _address.text,
+                      'dob': _dob!.toString(),
+                      'docVerified': "false",
+                      'email': _email,
+                      'faceVerified': "false",
+                      'gender': _gender,
+                      'id': _idNum.text,
+                      'imageUrl': "",
+                      'iv': '',
+                      'key': "",
+                      'mobileNumber': _mobileNumber.text,
+                      'mobileVerified': "false",
+                      'name': _name.text,
+                      'surname': _lastName.text,
+                      'userId': "1",
+                    };
+                    insertData(data);
+                    // print("data insertedddddd");
                     await showRegistrationDialog(context);
                     if (!mounted) return;
                     Navigator.pop(context);

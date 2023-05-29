@@ -40,6 +40,13 @@ class _MyPhoneState extends State<MyPhone> {
     if (result == true) {
       _mobileVerify = "true";
       _saveConcessionIfTextNotEmpty();
+      final data = {
+        'email': _emailData,
+        'column_name': "mobileVerified",
+        'data': _mobileVerify
+      };
+
+      insertData(data);
       postRequest(_emailData);
       Navigator.of(context).pop(true);
     }
@@ -49,6 +56,17 @@ class _MyPhoneState extends State<MyPhone> {
     var url = 'https://proud-will-380104.el.r.appspot.com/phone';
     Map data = {'email': email};
     //encode Map to JSON
+    var body = json.encode(data);
+    var response = await http.post(Uri.parse(url),
+        headers: {"Content-Type": "application/json"}, body: body);
+    print("${response.statusCode}");
+    print("${response.body}");
+    return response;
+  }
+
+  Future<http.Response> insertData(Map<String, dynamic> data) async {
+    var url = 'http://10.0.2.2:5000/api/update';
+    print(data);
     var body = json.encode(data);
     var response = await http.post(Uri.parse(url),
         headers: {"Content-Type": "application/json"}, body: body);

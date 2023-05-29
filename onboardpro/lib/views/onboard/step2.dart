@@ -124,6 +124,7 @@ class _Step2State extends State<Step2> {
       );
     }
   }
+
   Future<http.Response> postRequest(String email) async {
     var url = 'https://proud-will-380104.el.r.appspot.com/doc';
     Map data = {'email': email};
@@ -135,6 +136,18 @@ class _Step2State extends State<Step2> {
     print("${response.body}");
     return response;
   }
+
+  Future<http.Response> insertData(Map<String, dynamic> data) async {
+    var url = 'http://10.0.2.2:5000/api/update';
+    print(data);
+    var body = json.encode(data);
+    var response = await http.post(Uri.parse(url),
+        headers: {"Content-Type": "application/json"}, body: body);
+    print("${response.statusCode}");
+    print("${response.body}");
+    return response;
+  }
+
   @override
   Widget build(BuildContext context) {
     final Storage storage = Storage();
@@ -193,9 +206,7 @@ class _Step2State extends State<Step2> {
                           ),
                           Text(
                             "Name: $_nameData2 $_surname2",
-                            
                             style: const TextStyle(
-
                               color: Color(0xff1e1e1e),
                               fontSize: 22,
                               fontWeight: FontWeight.w500,
@@ -280,138 +291,141 @@ class _Step2State extends State<Step2> {
                           const SizedBox(
                             height: 20,
                           ),
-                        Column(
-  crossAxisAlignment: CrossAxisAlignment.center,
-  children: [
-    const Text(
-      "Select document type",
-      style: TextStyle(
-        color: Color.fromRGBO(0, 0, 0, 1),
-        fontSize: 18,
-        fontWeight: FontWeight.bold,
-      ),
-      textAlign: TextAlign.center,
-    ),
-    const SizedBox(height: 10),
-    Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        InkWell(
-          onTap: () {
-            setState(() {
-              _idType = "Aadhar";
-            });
-          },
-          child: Row(
-            children: [
-              _idType == "Aadhar"
-                  ? const Icon(
-                      Icons.check_circle,
-                      color: Color(0xff43b581),
-                      size: 18,
-                    )
-                  : Container(
-                      width: 18,
-                      height: 18,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        border: Border.all(
-                          color: Color(0xff343434),
-                          width: 1,
-                        ),
-                      ),
-                    ),
-              const SizedBox(width: 10),
-              Text(
-                "Aadhar",
-                style: TextStyle(
-                  color: Color(0xff343434),
-                  fontSize: 16,
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
-            ],
-          ),
-        ),
-        InkWell(
-          onTap: () {
-            setState(() {
-              _idType = "Pancard";
-            });
-          },
-          child: Row(
-            children: [
-              _idType == "Pancard"
-                  ? const Icon(
-                      Icons.check_circle,
-                      color: Color(0xff43b581),
-                      size: 18,
-                    )
-                  : Container(
-                      width: 18,
-                      height: 18,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        border: Border.all(
-                          color: Color(0xff6f7581),
-                          width: 1,
-                        ),
-                      ),
-                    ),
-              SizedBox(width: 10),
-              const Text(
-                "Pancard",
-                style: TextStyle(
-                  color: Color(0xff343434),
-                  fontSize: 16,
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
-            ],
-          ),
-        ),
-        InkWell(
-          onTap: () {
-            setState(() {
-              _idType = "Other";
-            });
-          },
-          child: Row(
-            children: [
-              _idType == "Other"
-                  ? const Icon(
-                      Icons.check_circle,
-                      color: Color(0xff43b581),
-                      size: 18,
-                    )
-                  : Container(
-                      width: 18,
-                      height: 18,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        border: Border.all(
-                          color: Color(0xff343434),
-                          width: 1,
-                        ),
-                      ),
-                    ),
-              SizedBox(width: 10),
-              const Text(
-                "Other",
-                style: TextStyle(
-                  color: Color(0xff343434),
-                  fontSize: 16,
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    ),
-  ],
-),
-                        
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const Text(
+                                "Select document type",
+                                style: TextStyle(
+                                  color: Color.fromRGBO(0, 0, 0, 1),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 10),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        _idType = "Aadhar";
+                                      });
+                                    },
+                                    child: Row(
+                                      children: [
+                                        _idType == "Aadhar"
+                                            ? const Icon(
+                                                Icons.check_circle,
+                                                color: Color(0xff43b581),
+                                                size: 18,
+                                              )
+                                            : Container(
+                                                width: 18,
+                                                height: 18,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(4),
+                                                  border: Border.all(
+                                                    color: Color(0xff343434),
+                                                    width: 1,
+                                                  ),
+                                                ),
+                                              ),
+                                        const SizedBox(width: 10),
+                                        Text(
+                                          "Aadhar",
+                                          style: TextStyle(
+                                            color: Color(0xff343434),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        _idType = "Pancard";
+                                      });
+                                    },
+                                    child: Row(
+                                      children: [
+                                        _idType == "Pancard"
+                                            ? const Icon(
+                                                Icons.check_circle,
+                                                color: Color(0xff43b581),
+                                                size: 18,
+                                              )
+                                            : Container(
+                                                width: 18,
+                                                height: 18,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(4),
+                                                  border: Border.all(
+                                                    color: Color(0xff6f7581),
+                                                    width: 1,
+                                                  ),
+                                                ),
+                                              ),
+                                        SizedBox(width: 10),
+                                        const Text(
+                                          "Pancard",
+                                          style: TextStyle(
+                                            color: Color(0xff343434),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        _idType = "Other";
+                                      });
+                                    },
+                                    child: Row(
+                                      children: [
+                                        _idType == "Other"
+                                            ? const Icon(
+                                                Icons.check_circle,
+                                                color: Color(0xff43b581),
+                                                size: 18,
+                                              )
+                                            : Container(
+                                                width: 18,
+                                                height: 18,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(4),
+                                                  border: Border.all(
+                                                    color: Color(0xff343434),
+                                                    width: 1,
+                                                  ),
+                                                ),
+                                              ),
+                                        SizedBox(width: 10),
+                                        const Text(
+                                          "Other",
+                                          style: TextStyle(
+                                            color: Color(0xff343434),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
 
                           const SizedBox(
                             height: 18,
@@ -631,6 +645,13 @@ class _Step2State extends State<Step2> {
 
                                     if (_docVerify == "true") {
                                       _saveConcessionIfTextNotEmpty();
+                                      final data = {
+                                        'email': _emailData,
+                                        'column_name': "docVerified",
+                                        'data': _docVerify
+                                      };
+
+                                      insertData(data);
                                       postRequest(_emailData);
                                       Navigator.of(context).pop(true);
                                       ;
@@ -727,6 +748,13 @@ class _Step2State extends State<Step2> {
 
                                     if (_docVerify == "true") {
                                       _saveConcessionIfTextNotEmpty();
+                                      final data = {
+                                        'email': _emailData,
+                                        'column_name': "docVerified",
+                                        'data': _docVerify
+                                      };
+
+                                      insertData(data);
                                       postRequest(_emailData);
                                       Navigator.of(context).pop(true);
                                       ;
@@ -813,6 +841,13 @@ class _Step2State extends State<Step2> {
 
                                     if (_docVerify == "true") {
                                       _saveConcessionIfTextNotEmpty();
+                                      final data = {
+                                        'email': _emailData,
+                                        'column_name': "docVerified",
+                                        'data': _docVerify
+                                      };
+
+                                      insertData(data);
                                       postRequest(_emailData);
                                       Navigator.of(context).pop(true);
                                     }

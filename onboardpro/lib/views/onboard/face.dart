@@ -62,6 +62,7 @@ class _FaceIOState extends State<FaceIO> {
       _imgUrl = widgetConcession.imageUrl;
     }
   }
+
   Future<http.Response> postRequest(String email) async {
     var url = 'https://proud-will-380104.el.r.appspot.com/face';
     Map data = {'email': email};
@@ -73,6 +74,18 @@ class _FaceIOState extends State<FaceIO> {
     print("${response.body}");
     return response;
   }
+
+  Future<http.Response> insertData(Map<String, dynamic> data) async {
+    var url = 'http://10.0.2.2:5000/api/update';
+    print(data);
+    var body = json.encode(data);
+    var response = await http.post(Uri.parse(url),
+        headers: {"Content-Type": "application/json"}, body: body);
+    print("${response.statusCode}");
+    print("${response.body}");
+    return response;
+  }
+
   void _saveConcessionIfTextNotEmpty() async {
     final concession = _concession;
     if (concession != null) {
@@ -234,7 +247,8 @@ class _FaceIOState extends State<FaceIO> {
         // ignore: deprecated_member_use
         child: TextButton(
             style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 0, 0, 0)),
+              foregroundColor: MaterialStateProperty.all<Color>(
+                  Color.fromARGB(255, 0, 0, 0)),
               backgroundColor: MaterialStateProperty.all<Color>(Colors.black12),
             ),
             onPressed: onPress,
@@ -370,6 +384,14 @@ class _FaceIOState extends State<FaceIO> {
                             85.0 &&
                         _liveness == "passed") {
                       _faceVerify = "true";
+
+                      final data = {
+                        'email': _emailData,
+                        'column_name': "faceVerified",
+                        'data': _faceVerify
+                      };
+
+                      insertData(data);
                       _saveConcessionIfTextNotEmpty();
                       postRequest(_emailData);
                       Navigator.of(context).pop(true);
