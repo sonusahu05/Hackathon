@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:onboardpro/constants/routes.dart';
-import 'package:onboardpro/extensions/buildcontext/loc.dart';
 import 'package:onboardpro/services/auth/auth_service.dart';
 import 'package:onboardpro/services/cloud/notes/cloud_note.dart';
 import 'package:onboardpro/services/cloud/notes/firebase_cloud_storage.dart';
@@ -15,6 +14,7 @@ class NotesView extends StatefulWidget {
   const NotesView({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _NotesViewState createState() => _NotesViewState();
 }
 

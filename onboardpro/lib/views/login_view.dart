@@ -1,6 +1,5 @@
 import 'package:onboardpro/constants/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:onboardpro/extensions/buildcontext/loc.dart';
 import 'package:onboardpro/services/auth/auth_exceptions.dart';
 import 'package:onboardpro/services/auth/bloc/auth_bloc.dart';
 import 'package:onboardpro/services/auth/bloc/auth_event.dart';

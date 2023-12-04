@@ -1,7 +1,6 @@
 import 'package:onboardpro/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:onboardpro/extensions/buildcontext/loc.dart';
 import 'package:onboardpro/services/auth/bloc/auth_bloc.dart';
 import 'package:onboardpro/services/auth/bloc/auth_event.dart';
 import 'package:onboardpro/services/auth/bloc/auth_state.dart';
@@ -14,6 +13,7 @@ class ForgotPasswordView extends StatefulWidget {
   const ForgotPasswordView({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _ForgotPasswordViewState createState() => _ForgotPasswordViewState();
 }
 
@@ -45,10 +45,10 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
           ),
           title: const Text("Forgot Password Functionality",
               style: TextStyle(fontSize: 20, color: Color(0xff15001C))),
-          content: Column(
+          content: const Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const <Widget>[
+            children: <Widget>[
               Text(
                   "If you have forgotten your password, you can reset it by entering your email address associated with your account."),
               SizedBox(height: 16),
@@ -277,9 +277,9 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                           color: const Color(0xff0bfeef),
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
+                          children: [
                             Text(
                               'Continue',
                               style: TextStyle(

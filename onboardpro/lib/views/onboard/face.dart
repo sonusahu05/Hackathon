@@ -1,17 +1,14 @@
 import 'dart:convert';
-import 'dart:ffi';
-import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:io' as io;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
+// ignore: library_prefixes
 import 'package:flutter_face_api/face_api.dart' as Regula;
-import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:image_picker/image_picker.dart';
 import 'package:onboardpro/services/cloud/onboard/cloud_onboard.dart';
 import 'package:onboardpro/services/cloud/onboard/firebase_cloud_onboard_storage.dart';
-import 'package:onboardpro/services/cloud/onboard/firebase_storage.dart';
 import 'package:onboardpro/utilities/generics/get_arguments.dart';
 
 class FaceIO extends StatefulWidget {
@@ -70,19 +67,14 @@ class _FaceIOState extends State<FaceIO> {
     var body = json.encode(data);
     var response = await http.post(Uri.parse(url),
         headers: {"Content-Type": "application/json"}, body: body);
-    print("${response.statusCode}");
-    print("${response.body}");
     return response;
   }
 
   Future<http.Response> insertData(Map<String, dynamic> data) async {
     var url = 'http://10.0.2.2:5000/api/update';
-    print(data);
     var body = json.encode(data);
     var response = await http.post(Uri.parse(url),
         headers: {"Content-Type": "application/json"}, body: body);
-    print("${response.statusCode}");
-    print("${response.body}");
     return response;
   }
 
@@ -121,12 +113,6 @@ class _FaceIOState extends State<FaceIO> {
     const EventChannel('flutter_face_api/event/video_encoder_completion')
         .receiveBroadcastStream()
         .listen((event) {
-      var response = jsonDecode(event);
-      String transactionId = response["transactionId"];
-      bool success = response["success"];
-      print("video_encoder_completion:");
-      print("    success: $success");
-      print("    transactionId: $transactionId");
     });
   }
 
@@ -134,8 +120,6 @@ class _FaceIOState extends State<FaceIO> {
     Regula.FaceSDK.init().then((json) {
       var response = jsonDecode(json);
       if (!response["success"]) {
-        print("Init failed: ");
-        print(json);
       }
     });
   }
@@ -243,17 +227,18 @@ class _FaceIOState extends State<FaceIO> {
                 : "unknown");
       });
 
-  Widget createButton(String text, VoidCallback onPress) => Container(
+  Widget createButton(String text, VoidCallback onPress) => SizedBox(
+        // ignore: deprecated_member_use
+        width: 250,
         // ignore: deprecated_member_use
         child: TextButton(
             style: ButtonStyle(
               foregroundColor: MaterialStateProperty.all<Color>(
-                  Color.fromARGB(255, 0, 0, 0)),
+                  const Color.fromARGB(255, 0, 0, 0)),
               backgroundColor: MaterialStateProperty.all<Color>(Colors.black12),
             ),
             onPressed: onPress,
             child: Text(text)),
-        width: 250,
       );
 
   Widget createImage(image, VoidCallback onPress) => Material(
@@ -266,7 +251,6 @@ class _FaceIOState extends State<FaceIO> {
       ));
   @override
   Widget build(BuildContext context) {
-    final Storage storage = Storage();
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(

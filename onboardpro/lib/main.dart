@@ -1,4 +1,3 @@
-import 'package:onboardpro/constants/constants.dart';
 import 'package:onboardpro/services/auth/auth_service.dart';
 import 'package:onboardpro/services/auth/firebase_auth_provider.dart';
 import 'package:onboardpro/views/common_view.dart';
@@ -64,7 +63,7 @@ Future main() async {
         about: (context) => const AboutView(),
         onboardingRegister: (context) => const OnboardRegister(),
         onboarding: (context) => const OnboardingView(),
-        step2: (context) => const Step2(),
+        // step2: (context) => const Step2(),
         good: (context) => const Good(),
         steps: (context) => const OnboardingSteps(),
         face: (context) => const FaceIO(),
@@ -353,9 +352,9 @@ class _OnBoardingState extends State<OnBoarding> {
                       color: const Color(0xff0bfeef),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
+                      children: [
                         Text(
                           'Get started',
                           style: TextStyle(

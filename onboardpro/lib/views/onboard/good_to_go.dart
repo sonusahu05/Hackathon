@@ -1,16 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 // import 'package:google_ml_kit/google_ml_kit.dart';
-import 'package:govt_documents_validator/govt_documents_validator.dart';
-import 'package:firebase_ml_vision/firebase_ml_vision.dart';
+// import 'package:govt_documents_validator/govt_documents_validator.dart';
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:onboardpro/services/cloud/onboard/cloud_onboard.dart';
 import 'package:onboardpro/services/cloud/onboard/firebase_cloud_onboard_storage.dart';
 import 'package:onboardpro/services/cloud/onboard/firebase_storage.dart';
 import 'package:onboardpro/utilities/generics/get_arguments.dart';
 import 'dart:async';
-import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:string_similarity/string_similarity.dart';
 
 class Good extends StatefulWidget {
@@ -22,8 +19,6 @@ class Good extends StatefulWidget {
 
 class _GoodState extends State<Good> {
   bool textScanning = false;
-  late String _imageUrl;
-  File? _imageFile;
   String scannedText = "";
   // final _textRecognizer = TextRecognizer();
   String _idNum = "";
@@ -112,7 +107,6 @@ class _GoodState extends State<Good> {
 
   @override
   Widget build(BuildContext context) {
-    final Storage storage = Storage();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

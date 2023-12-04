@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:onboardpro/extensions/buildcontext/loc.dart';
 import 'package:onboardpro/utilities/dialogs/generic_dialog.dart';
 
 Future<void> showErrorDialog(
